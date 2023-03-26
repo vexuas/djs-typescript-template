@@ -3,6 +3,12 @@
   "version": "0.0.0",
   "description": "Opinionated Typescript template for building Discord.js applications",
   "license": "MIT",
+  "scripts": {
+    "auto:changelog": "yarn auto changelog",
+    "auto:version": "yarn version --`auto version`",
+    "auto:release": "yarn auto:changelog && yarn auto:version",
+    "release": "git fetch --tags --force && git checkout -b release/$(date +'%Y-%m-%d') && yarn auto:release && git push -u origin head"
+  },
   "dependencies": {
     "date-fns": "^2.29.3",
     "discord.js": "^14.8.0",
