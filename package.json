@@ -8,6 +8,7 @@
     "discord.js": "^14.8.0",
     "lodash": "^4.17.21",
     "mixpanel": "^0.17.0",
-    "pg": "^8.10.0"
+    "pg": "^8.10.0",
+    "topgg-autoposter": "^2.0.1"
   }
 }
