@@ -28,7 +28,7 @@
     {
       "name": "tweaks",
       "changelogTitle": "🔧 Tweaks",
-      "description": "For stuff that should increment the patch, but aren't bug fixes or tests i.e. copy changes, minor styling updates. Increments the patch version when merged",
+      "description": "Small changes that aren't bug fixes or tests. Increments the patch version when merged",
       "releaseType": "patch"
     },
     {
