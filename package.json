@@ -10,5 +10,9 @@
     "mixpanel": "^0.17.0",
     "pg": "^8.10.0",
     "topgg-autoposter": "^2.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "typescript": "^5.0.2"
   }
 }
