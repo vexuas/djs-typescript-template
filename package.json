@@ -4,6 +4,9 @@
   "description": "Opinionated Typescript template for building Discord.js applications",
   "license": "MIT",
   "scripts": {
+    "start": "yarn build && yarn build:watch",
+    "build": "tsc",
+    "build:watch": "yarn tsc-watch --onSuccess 'nodemon dist/App.js'",
     "auto:changelog": "yarn auto changelog",
     "auto:version": "yarn version --`auto version`",
     "auto:release": "yarn auto:changelog && yarn auto:version",

@@ -9,7 +9,7 @@ const initialize = async (): Promise<void> => {
   try {
     await app.login(BOT_TOKEN);
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
