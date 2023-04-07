@@ -6,7 +6,7 @@
   "scripts": {
     "start": "yarn build && yarn build:watch",
     "build": "tsc",
-    "build:watch": "yarn tsc-watch --onSuccess 'nodemon dist/App.js'",
+    "build:watch": "yarn tsc-watch --onSuccess 'node dist/App.js'",
     "auto:changelog": "yarn auto changelog",
     "auto:version": "yarn version --`auto version`",
     "auto:release": "yarn auto:changelog && yarn auto:version",
@@ -28,9 +28,11 @@
     "eslint": "^8.36.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "jest": "^29.5.0",
-    "nodemon": "^2.0.22",
     "ts-jest": "^29.0.5",
     "tsc-watch": "^6.0.0",
     "typescript": "^5.0.2"
+  },
+  "engines": {
+    "node": ">=16.13.0"
   }
 }
