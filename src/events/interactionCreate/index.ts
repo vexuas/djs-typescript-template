@@ -11,5 +11,6 @@ export default function ({ app, appCommands }: EventModule) {
       const command = appCommands[commandName as keyof AppCommands];
       command && (await command.execute({ interaction, app }));
     }
+    //Maybe add buttons, selections and modal handlers here eventually
   });
 }
