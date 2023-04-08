@@ -10,7 +10,7 @@ type GuildRecord = {
   owner_id: string;
 };
 
-export async function createGuildTable(existingGuilds: Collection<string, Guild>) {
+export async function createGuildTable() {
   const client: PoolClient = await pool.connect();
   if (client) {
     try {
@@ -18,16 +18,6 @@ export async function createGuildTable(existingGuilds: Collection<string, Guild>
       const createGuildTableQuery =
         'CREATE TABLE IF NOT EXISTS Guild(uuid TEXT NOT NULL PRIMARY KEY, name TEXT NOT NULL, member_count INTEGER NOT NULL, owner_id TEXT NOT NULL)';
       await client.query(createGuildTableQuery);
-
-      const guildsInDatabase = await getGuilds();
-      existingGuilds.forEach(async (guild: Guild) => {
-        const isInDatabase =
-          guildsInDatabase &&
-          guildsInDatabase.rows.find((guildDb: GuildRecord) => guildDb.uuid === guild.id);
-        if (!isInDatabase) {
-          await insertNewGuild(guild, client);
-        }
-      });
       await client.query('COMMIT');
     } catch (error) {
       await client.query('ROLLBACK');
@@ -55,8 +45,19 @@ export async function getGuilds() {
     }
   }
 }
-export async function insertNewGuild(newGuild: Guild, existingClient?: PoolClient) {
-  let client: PoolClient = existingClient ? existingClient : await pool.connect();
+export async function populateGuilds(existingGuilds: Collection<string, Guild>) {
+  const guildsInDatabase = await getGuilds();
+  existingGuilds.forEach(async (guild: Guild) => {
+    const isInDatabase =
+      guildsInDatabase &&
+      guildsInDatabase.rows.find((guildDb: GuildRecord) => guildDb.uuid === guild.id);
+    if (!isInDatabase) {
+      await insertNewGuild(guild);
+    }
+  });
+}
+export async function insertNewGuild(newGuild: Guild) {
+  const client: PoolClient = await pool.connect();
   if (client) {
     try {
       await client.query('BEGIN');
@@ -74,7 +75,7 @@ export async function insertNewGuild(newGuild: Guild, existingClient?: PoolClien
       console.log(error);
       //TODO: Add error handling
     } finally {
-      !existingClient && client.release();
+      client.release();
     }
   }
 }
