@@ -8,7 +8,7 @@ export type AppCommands = {
 };
 export type AppCommand = {
   data: SlashCommandBuilder;
-  execute: (data: AppCommandOptions) => void;
+  execute: (data: AppCommandOptions) => Promise<void>;
 };
 export type AppCommandOptions = {
   interaction: CommandInteraction;
