@@ -1,6 +1,9 @@
 import { Client } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
+import { AppCommands, getApplicationCommands } from '../commands/commands';
+
+const appCommands = getApplicationCommands();
 
 interface Props {
   app: Client;
@@ -10,6 +13,7 @@ type ExportedEventModule = {
 };
 export type EventModule = {
   app: Client;
+  appCommands?: AppCommands;
 };
 export function registerEventHandlers({ app }: Props): void {
   const loadModules = (directoryPath: string) => {
@@ -27,7 +31,7 @@ export function registerEventHandlers({ app }: Props): void {
           if (file.name === 'index.js') {
             const modulePath = `.${filePath.replace('dist/events', '')}`;
             const currentModule = require(modulePath) as ExportedEventModule;
-            currentModule.default({ app });
+            currentModule.default({ app, appCommands });
           }
         });
     });
