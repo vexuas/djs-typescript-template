@@ -10,8 +10,7 @@ export default {
       await interaction.editReply('Hello!');
       throw new Error('This is a test');
     } catch (error) {
-      console.log(interaction.commandName);
-      sendErrorLog(error);
+      sendErrorLog({ error, interaction });
     }
   },
 } as AppCommand;
