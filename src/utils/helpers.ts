@@ -1,5 +1,5 @@
 import { APIEmbed, Client, Guild, WebhookClient } from 'discord.js';
-import { isEmpty } from 'lodash';
+import { capitalize, isEmpty } from 'lodash';
 import { ERROR_NOTIFICATION_WEBHOOK_URL } from '../config/environment';
 
 export const serverNotificationEmbed = async ({
@@ -47,9 +47,19 @@ export const serverNotificationEmbed = async ({
   return embed;
 };
 
-export const sendErrorLog = async (error: any) => {
+export const sendErrorLog = async ({
+  error,
+  commandName,
+}: {
+  error: any;
+  commandName?: string;
+}) => {
   console.log(error);
   if (ERROR_NOTIFICATION_WEBHOOK_URL && !isEmpty(ERROR_NOTIFICATION_WEBHOOK_URL)) {
+    const embed = {
+      title: commandName ? `Error | ${capitalize(commandName)} Command` : 'Error',
+      color: 16711680,
+    };
     const notificationWebhook = new WebhookClient({ url: ERROR_NOTIFICATION_WEBHOOK_URL });
     await notificationWebhook.send({
       content: error.message ? error.message : 'Oops something went wrong D:',
