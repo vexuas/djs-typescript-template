@@ -42,7 +42,6 @@ export default function ({ app, appCommands }: EventModule) {
     try {
       await registerApplicationCommands(appCommands);
       if (USE_DATABASE) {
-        console.log('hi');
         await createGuildTable();
         await populateGuilds(app.guilds.cache);
       }

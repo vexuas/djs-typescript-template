@@ -35,7 +35,6 @@ export async function getGuilds() {
       await client.query('BEGIN');
       const getAllGuildsQuery = 'SELECT * FROM Guild';
       const allGuilds = await client.query(getAllGuildsQuery);
-      console.log(allGuilds);
       return allGuilds;
     } catch (error) {
       await client.query('ROLLBACK');
@@ -47,15 +46,20 @@ export async function getGuilds() {
   }
 }
 export async function populateGuilds(existingGuilds: Collection<string, Guild>) {
-  const guildsInDatabase = await getGuilds();
-  existingGuilds.forEach(async (guild: Guild) => {
-    const isInDatabase =
-      guildsInDatabase &&
-      guildsInDatabase.rows.find((guildDb: GuildRecord) => guildDb.uuid === guild.id);
-    if (!isInDatabase) {
-      await insertNewGuild(guild);
-    }
-  });
+  try {
+    const guildsInDatabase = await getGuilds();
+    existingGuilds.forEach(async (guild: Guild) => {
+      const isInDatabase =
+        guildsInDatabase &&
+        guildsInDatabase.rows.find((guildDb: GuildRecord) => guildDb.uuid === guild.id);
+      if (!isInDatabase) {
+        await insertNewGuild(guild);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    //TODO: Add error handling
+  }
 }
 export async function insertNewGuild(newGuild: Guild) {
   const client: PoolClient = await pool.connect();
