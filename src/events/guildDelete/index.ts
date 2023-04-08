@@ -2,7 +2,7 @@ import { Guild, WebhookClient } from 'discord.js';
 import { isEmpty } from 'lodash';
 import { GUILD_NOTIFICATION_WEBHOOK_URL, USE_DATABASE } from '../../config/environment';
 import { deleteGuild } from '../../services/database';
-import { serverNotificationEmbed } from '../../utils/helpers';
+import { sendErrorLog, serverNotificationEmbed } from '../../utils/helpers';
 import { EventModule } from '../events';
 
 export default function ({ app }: EventModule) {
@@ -19,8 +19,7 @@ export default function ({ app }: EventModule) {
         });
       }
     } catch (error) {
-      //TODO: Add error handling
-      console.log(error);
+      sendErrorLog({ error });
     }
   });
 }

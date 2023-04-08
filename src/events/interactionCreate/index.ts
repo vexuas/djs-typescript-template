@@ -1,5 +1,6 @@
 import { CacheType, Interaction } from 'discord.js';
 import { AppCommands } from '../../commands/commands';
+import { sendErrorLog } from '../../utils/helpers';
 import { EventModule } from '../events';
 
 export default function ({ app, appCommands }: EventModule) {
@@ -13,9 +14,8 @@ export default function ({ app, appCommands }: EventModule) {
         command && (await command.execute({ interaction, app }));
       }
       //Maybe add buttons, selections and modal handlers here eventually
-    } catch (errors) {
-      //TODO: Add error handling
-      console.log(errors);
+    } catch (error) {
+      sendErrorLog({ error });
     }
   });
 }

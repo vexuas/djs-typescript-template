@@ -2,6 +2,7 @@ import { REST, Routes } from 'discord.js';
 import { AppCommands } from '../../commands/commands';
 import { BOT_TOKEN, ENV, GUILD_IDS, USE_DATABASE } from '../../config/environment';
 import { createGuildTable, populateGuilds } from '../../services/database';
+import { sendErrorLog } from '../../utils/helpers';
 import { EventModule } from '../events';
 
 const rest = new REST({ version: '9' }).setToken(BOT_TOKEN);
@@ -32,8 +33,7 @@ const registerApplicationCommands = async (commands?: AppCommands) => {
       console.log('Successfully registered global application commands');
     }
   } catch (error) {
-    //TODO: Add error handling
-    console.log(error);
+    sendErrorLog({ error });
   }
 };
 

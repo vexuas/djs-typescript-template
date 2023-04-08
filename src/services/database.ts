@@ -1,6 +1,7 @@
 import { Collection, Guild } from 'discord.js';
 import { Pool, PoolClient } from 'pg';
 import { databaseConfig } from '../config/database';
+import { sendErrorLog } from '../utils/helpers';
 const pool: Pool = new Pool(databaseConfig);
 
 type GuildRecord = {
@@ -21,8 +22,7 @@ export async function createGuildTable() {
       await client.query('COMMIT');
     } catch (error) {
       await client.query('ROLLBACK');
-      console.log(error);
-      //TODO: Add error handling
+      sendErrorLog({ error });
     } finally {
       client.release();
     }
@@ -38,8 +38,7 @@ export async function getGuilds() {
       return allGuilds;
     } catch (error) {
       await client.query('ROLLBACK');
-      console.log(error);
-      //TODO: Add error handling
+      sendErrorLog({ error });
     } finally {
       client.release();
     }
@@ -57,8 +56,7 @@ export async function populateGuilds(existingGuilds: Collection<string, Guild>) 
       }
     });
   } catch (error) {
-    console.log(error);
-    //TODO: Add error handling
+    sendErrorLog({ error });
   }
 }
 export async function insertNewGuild(newGuild: Guild) {
@@ -77,8 +75,7 @@ export async function insertNewGuild(newGuild: Guild) {
       await client.query('COMMIT');
     } catch (error) {
       await client.query('ROLLBACK');
-      console.log(error);
-      //TODO: Add error handling
+      sendErrorLog({ error });
     } finally {
       client.release();
     }
@@ -94,7 +91,7 @@ export async function deleteGuild(existingGuild: Guild) {
       await client.query('COMMIT');
     } catch (error) {
       await client.query('ROLLBACK');
-      console.log(error);
+      sendErrorLog({ error });
     } finally {
       client.release();
     }
