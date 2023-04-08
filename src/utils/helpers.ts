@@ -66,6 +66,7 @@ export const sendErrorLog = async ({
   error: any;
   interaction?: CommandInteraction;
 }) => {
+  console.error(error);
   const errorID = uuid();
   if (interaction) {
     const errorEmbed = {
