@@ -35,6 +35,7 @@ export async function getGuilds() {
       await client.query('BEGIN');
       const getAllGuildsQuery = 'SELECT * FROM Guild';
       const allGuilds = await client.query(getAllGuildsQuery);
+      console.log(allGuilds);
       return allGuilds;
     } catch (error) {
       await client.query('ROLLBACK');
