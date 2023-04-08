@@ -1,4 +1,6 @@
-import { APIEmbed, Client, Guild } from 'discord.js';
+import { APIEmbed, Client, Guild, WebhookClient } from 'discord.js';
+import { isEmpty } from 'lodash';
+import { ERROR_NOTIFICATION_WEBHOOK_URL } from '../config/environment';
 
 export const serverNotificationEmbed = async ({
   app,
@@ -43,4 +45,16 @@ export const serverNotificationEmbed = async ({
     ],
   };
   return embed;
+};
+
+export const sendErrorLog = async (error: any) => {
+  console.log(error);
+  if (ERROR_NOTIFICATION_WEBHOOK_URL && !isEmpty(ERROR_NOTIFICATION_WEBHOOK_URL)) {
+    const notificationWebhook = new WebhookClient({ url: ERROR_NOTIFICATION_WEBHOOK_URL });
+    await notificationWebhook.send({
+      content: error.message ? error.message : 'Oops something went wrong D:',
+      username: 'My App Error Notification',
+      avatarURL: '',
+    });
+  }
 };
