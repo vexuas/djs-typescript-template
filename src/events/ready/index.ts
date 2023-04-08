@@ -1,6 +1,7 @@
 import { REST, Routes } from 'discord.js';
 import { AppCommands } from '../../commands/commands';
-import { BOT_TOKEN, ENV, GUILD_IDS } from '../../config/environment';
+import { BOT_TOKEN, ENV, GUILD_IDS, USE_DATABASE } from '../../config/environment';
+import { createGuildTable, populateGuilds } from '../../services/database';
 import { EventModule } from '../events';
 
 const rest = new REST({ version: '9' }).setToken(BOT_TOKEN);
@@ -40,6 +41,10 @@ export default function ({ app, appCommands }: EventModule) {
   app.once('ready', async () => {
     try {
       await registerApplicationCommands(appCommands);
+      if (USE_DATABASE) {
+        await createGuildTable();
+        await populateGuilds(app.guilds.cache);
+      }
       console.log("I'm booting up! (◕ᴗ◕✿)");
     } catch (error) {
       console.log(error);
