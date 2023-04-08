@@ -10,6 +10,10 @@ import { capitalize, isEmpty } from 'lodash';
 import { ERROR_NOTIFICATION_WEBHOOK_URL } from '../config/environment';
 import { v4 as uuid } from 'uuid';
 
+export const codeMark = (text: string) => {
+  return '`' + text + '`';
+};
+
 export const serverNotificationEmbed = async ({
   app,
   guild,
@@ -62,12 +66,22 @@ export const sendErrorLog = async ({
   error: any;
   interaction?: CommandInteraction;
 }) => {
+  const errorID = uuid();
+  if (interaction) {
+    const errorEmbed = {
+      description: `Oops something went wrong! D:\n\nError: ${
+        error.message ? codeMark(error.message) : codeMark('Unexpected Error')
+      }\nError ID: ${codeMark(errorID)}`,
+      color: 16711680,
+    };
+    await interaction.editReply({ embeds: [errorEmbed] });
+  }
   if (ERROR_NOTIFICATION_WEBHOOK_URL && !isEmpty(ERROR_NOTIFICATION_WEBHOOK_URL)) {
     const interactionChannel = interaction?.channel as GuildChannel | undefined;
-    const embed: APIEmbed = {
+    const notificationEmbed: APIEmbed = {
       title: interaction ? `Error | ${capitalize(interaction.commandName)} Command` : 'Error',
       color: 16711680,
-      description: `uuid: ${uuid()}\nError: ${error.message ? error.message : 'Unexpected Error'}`,
+      description: `uuid: ${errorID}\nError: ${error.message ? error.message : 'Unexpected Error'}`,
       fields: interaction
         ? [
             {
@@ -105,7 +119,7 @@ export const sendErrorLog = async ({
     };
     const notificationWebhook = new WebhookClient({ url: ERROR_NOTIFICATION_WEBHOOK_URL });
     await notificationWebhook.send({
-      embeds: [embed],
+      embeds: [notificationEmbed],
       username: 'My App Error Notification',
       avatarURL: '',
     });

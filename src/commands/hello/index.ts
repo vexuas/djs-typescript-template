@@ -7,8 +7,8 @@ export default {
   async execute({ interaction }: AppCommandOptions) {
     try {
       await interaction.deferReply();
-      await interaction.editReply('Hello!');
       throw new Error('This is a test');
+      await interaction.editReply('Hello!');
     } catch (error) {
       sendErrorLog({ error, interaction });
     }
