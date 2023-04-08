@@ -1,4 +1,18 @@
-import { APIEmbed, Client, Guild } from 'discord.js';
+import {
+  APIEmbed,
+  Client,
+  CommandInteraction,
+  Guild,
+  GuildChannel,
+  WebhookClient,
+} from 'discord.js';
+import { capitalize, isEmpty } from 'lodash';
+import { ERROR_NOTIFICATION_WEBHOOK_URL } from '../config/environment';
+import { v4 as uuid } from 'uuid';
+
+export const codeMark = (text: string) => {
+  return '`' + text + '`';
+};
 
 export const serverNotificationEmbed = async ({
   app,
@@ -43,4 +57,72 @@ export const serverNotificationEmbed = async ({
     ],
   };
   return embed;
+};
+
+export const sendErrorLog = async ({
+  error,
+  interaction,
+}: {
+  error: any;
+  interaction?: CommandInteraction;
+}) => {
+  console.error(error);
+  const errorID = uuid();
+  if (interaction) {
+    const errorEmbed = {
+      description: `Oops something went wrong! D:\n\nError: ${
+        error.message ? codeMark(error.message) : codeMark('Unexpected Error')
+      }\nError ID: ${codeMark(errorID)}`,
+      color: 16711680,
+    };
+    await interaction.editReply({ embeds: [errorEmbed] });
+  }
+  if (ERROR_NOTIFICATION_WEBHOOK_URL && !isEmpty(ERROR_NOTIFICATION_WEBHOOK_URL)) {
+    const interactionChannel = interaction?.channel as GuildChannel | undefined;
+    const notificationEmbed: APIEmbed = {
+      title: interaction ? `Error | ${capitalize(interaction.commandName)} Command` : 'Error',
+      color: 16711680,
+      description: `uuid: ${errorID}\nError: ${error.message ? error.message : 'Unexpected Error'}`,
+      fields: interaction
+        ? [
+            {
+              name: 'User',
+              value: interaction.user.username,
+              inline: true,
+            },
+            {
+              name: 'User ID',
+              value: interaction.user.id,
+              inline: true,
+            },
+            {
+              name: 'Channel',
+              value: interactionChannel ? interactionChannel.name : '-',
+              inline: true,
+            },
+            {
+              name: 'Channel ID',
+              value: interaction.channelId,
+              inline: true,
+            },
+            {
+              name: 'Guild',
+              value: interaction.guild ? interaction.guild.name : '-',
+              inline: true,
+            },
+            {
+              name: 'Guild ID',
+              value: interaction.guildId ? interaction.guildId : '-',
+              inline: true,
+            },
+          ]
+        : undefined,
+    };
+    const notificationWebhook = new WebhookClient({ url: ERROR_NOTIFICATION_WEBHOOK_URL });
+    await notificationWebhook.send({
+      embeds: [notificationEmbed],
+      username: 'My App Error Notification',
+      avatarURL: '',
+    });
+  }
 };

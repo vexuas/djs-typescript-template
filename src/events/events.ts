@@ -2,6 +2,7 @@ import { Client } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
 import { AppCommands, getApplicationCommands } from '../commands/commands';
+import { sendErrorLog } from '../utils/helpers';
 
 const appCommands = getApplicationCommands();
 
@@ -19,8 +20,7 @@ export function registerEventHandlers({ app }: Props): void {
   const loadModules = (directoryPath: string) => {
     fs.readdir(directoryPath, { withFileTypes: true }, (error, files) => {
       if (error) {
-        //TODO: Replace with error handling
-        console.log(error);
+        sendErrorLog({ error });
       }
       files &&
         files.forEach((file) => {

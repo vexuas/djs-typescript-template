@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js';
+import { sendErrorLog } from '../../utils/helpers';
 import { AppCommand, AppCommandOptions } from '../commands';
 
 export default {
@@ -8,7 +9,7 @@ export default {
       await interaction.deferReply();
       await interaction.editReply('Hello!');
     } catch (error) {
-      console.log(error);
+      sendErrorLog({ error, interaction });
     }
   },
 } as AppCommand;
