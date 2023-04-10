@@ -9,7 +9,7 @@ type CommandEvent = {
   guild: Guild | null;
   command: string;
   options?: string;
-  properties?: Object;
+  properties?: object;
 };
 type UserProfile = {
   client: Mixpanel;
