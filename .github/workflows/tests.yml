@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: 16
 
+      - name: Create config folder
+        run: mkdir src/config
       - name: Load environment config
         run: echo "export const data = { ENV = '', BOT_TOKEN = '', MIXPANEL_ID = '', TOP_GG_TOKEN = '', GUILD_IDS = '', GUILD_NOTIFICATION_WEBHOOK_URL = '', USE_DATABASE = '', ERROR_NOTIFICATION_WEBHOOK_URL = '' }" > src/config/environment.ts
       - name: Load database config
@@ -39,6 +41,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16
+
+      - name: Create config folder
+        run: mkdir src/config
 
       - name: Load environment config
         run: echo "export const data = { ENV = '', BOT_TOKEN = '', MIXPANEL_ID = '', TOP_GG_TOKEN = '', GUILD_IDS = '', GUILD_NOTIFICATION_WEBHOOK_URL = '', USE_DATABASE = '', ERROR_NOTIFICATION_WEBHOOK_URL = '' };" > src/config/environment.ts
