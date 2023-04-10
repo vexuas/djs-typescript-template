@@ -8,6 +8,7 @@
     "build": "tsc",
     "build:watch": "yarn tsc-watch --onSuccess 'node dist/App.js'",
     "test": "jest",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
     "auto:changelog": "yarn auto changelog",
     "auto:version": "yarn version --`auto version`",
     "auto:release": "yarn auto:changelog && yarn auto:version",
