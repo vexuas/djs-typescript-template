@@ -1,19 +1,12 @@
-import {
-  DMChannel,
-  Guild,
-  PartialDMChannel,
-  PartialGroupDMChannel,
-  TextBasedChannel,
-  User,
-} from 'discord.js';
+import { Guild, GuildTextBasedChannel, User } from 'discord.js';
 import { capitalize } from 'lodash';
 import { Mixpanel } from 'mixpanel';
 
 type CommandEvent = {
   client: Mixpanel;
   user: User;
-  channel: TextBasedChannel;
-  guild: Guild;
+  channel: GuildTextBasedChannel | null;
+  guild: Guild | null;
   command: string;
   options?: string;
   properties?: Object;
@@ -21,8 +14,8 @@ type CommandEvent = {
 type UserProfile = {
   client: Mixpanel;
   user: User;
-  channel: Exclude<TextBasedChannel, DMChannel | PartialDMChannel | PartialGroupDMChannel>;
-  guild: Guild;
+  channel: GuildTextBasedChannel | null;
+  guild: Guild | null;
   command?: string;
 };
 
@@ -31,14 +24,14 @@ function setUserProfile({ client, user, channel, guild, command }: UserProfile) 
     $name: user.username,
     $created: user.createdAt.toISOString(),
     tag: user.tag,
-    guild: guild.name,
-    guild_id: guild.id,
+    guild: guild ? guild.name : 'N/A',
+    guild_id: guild ? guild.id : 'N/A',
   });
   client.people.set_once(user.id, {
-    first_used: new Date().toISOString(), //Unfortunately this is only after v2.5
+    first_used: new Date().toISOString(),
     first_command: command,
-    first_used_in_guild: guild.name,
-    first_used_in_channel: channel.name,
+    first_used_in_guild: guild ? guild.name : 'N/A',
+    first_used_in_channel: channel ? channel.name : 'N/A',
   });
 }
 export function sendCommandEvent({
@@ -49,8 +42,7 @@ export function sendCommandEvent({
   client,
   options,
   properties,
-}: CommandEvent): void {
-  if (channel.isDMBased()) return;
+}: CommandEvent) {
   setUserProfile({ client, user, guild, channel, command });
   const eventName = `Use ${capitalize(command)} Command`;
 
@@ -58,10 +50,10 @@ export function sendCommandEvent({
     distinct_id: user.id,
     user: user.tag,
     user_name: user.username,
-    channel: channel.name,
-    channel_id: channel.id,
-    guild: guild.name,
-    guild_id: guild.id,
+    channel: channel ? channel.name : 'N/A',
+    channel_id: channel ? channel.id : 'N/A',
+    guild: guild ? guild.name : 'N/A',
+    guild_id: guild ? guild.id : 'N/A',
     command: command,
     arguments: options ? options : 'none',
     ...properties,
