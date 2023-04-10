@@ -1,5 +1,6 @@
 import { Client } from 'discord.js';
 import fs from 'fs';
+import { Mixpanel } from 'mixpanel';
 import path from 'path';
 import { AppCommands, getApplicationCommands } from '../commands/commands';
 import { sendErrorLog } from '../utils/helpers';
@@ -8,6 +9,7 @@ const appCommands = getApplicationCommands();
 
 interface Props {
   app: Client;
+  mixpanel: Mixpanel | null;
 }
 type ExportedEventModule = {
   default: (data: EventModule) => void;
@@ -15,8 +17,9 @@ type ExportedEventModule = {
 export type EventModule = {
   app: Client;
   appCommands?: AppCommands;
+  mixpanel?: Mixpanel | null;
 };
-export function registerEventHandlers({ app }: Props): void {
+export function registerEventHandlers({ app, mixpanel }: Props): void {
   const loadModules = (directoryPath: string) => {
     fs.readdir(directoryPath, { withFileTypes: true }, (error, files) => {
       if (error) {
@@ -31,7 +34,7 @@ export function registerEventHandlers({ app }: Props): void {
           if (file.name === 'index.js') {
             const modulePath = `.${filePath.replace('dist/events', '')}`;
             const currentModule = require(modulePath) as ExportedEventModule;
-            currentModule.default({ app, appCommands });
+            currentModule.default({ app, appCommands, mixpanel });
           }
         });
     });
