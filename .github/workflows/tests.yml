@@ -22,8 +22,11 @@ jobs:
         run: mkdir src/config
       - name: Load environment config
         run: >
-          echo "export const data = { ENV: '', BOT_TOKEN: '', MIXPANEL_ID: '', TOP_GG_TOKEN: '', GUILD_IDS: '', 
-          GUILD_NOTIFICATION_WEBHOOK_URL: '', USE_DATABASE: '', ERROR_NOTIFICATION_WEBHOOK_URL: '' }" > src/config/environment.ts
+          echo "export const ENV = ''; export const BOT_TOKEN = ''; export const MIXPANEL_ID = ''; export const TOP_GG_TOKEN = '';
+          export const GUILD_IDS = ''; export const GUILD_NOTIFICATION_WEBHOOK_URL = ''; export const USE_DATABASE: false; 
+          export const ERROR_NOTIFICATION_WEBHOOK_URL = '';" 
+          > src/config/environment.ts
+
       - name: Load database config
         run: echo "export const databaseConfig = {};" > src/config/database.ts
 
@@ -49,8 +52,11 @@ jobs:
 
       - name: Load environment config
         run: >
-          echo "export const data = { ENV: '', BOT_TOKEN: '', MIXPANEL_ID: '', TOP_GG_TOKEN: '', GUILD_IDS: '', 
-          GUILD_NOTIFICATION_WEBHOOK_URL: '', USE_DATABASE: '', ERROR_NOTIFICATION_WEBHOOK_URL: '' }" > src/config/environment.ts
+          echo "export const ENV = ''; export const BOT_TOKEN = ''; export const MIXPANEL_ID = ''; export const TOP_GG_TOKEN = '';
+          export const GUILD_IDS = ''; export const GUILD_NOTIFICATION_WEBHOOK_URL = ''; export const USE_DATABASE: false; 
+          export const ERROR_NOTIFICATION_WEBHOOK_URL = '';" 
+          > src/config/environment.ts
+
       - name: Load database config
         run: echo "export const databaseConfig = {};" > src/config/database.ts
 
