@@ -6,6 +6,10 @@ on:
     branches:
       - develop
 
+# Typescript and our jest tests will fail in the workflow since there are missing config files
+# To fix this, we need to manually load them to their respected files
+# Initially used secret variables to do this but decided to just hard code the declarations for simpler setup
+# We dont really need to add values to the variables, just need them defined in a file
 jobs:
   typescript:
     runs-on: ubuntu-latest
