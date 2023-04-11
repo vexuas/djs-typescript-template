@@ -1,3 +1,26 @@
+# v0.1.2 (Tue Apr 11 2023)
+
+#### 🧪 Tests
+
+- Add linting to test workflow [#18](https://github.com/vexuas/djs-typescript-template/pull/18) ([@vexuas](https://github.com/vexuas))
+
+#### 🔧 Tweaks
+
+- Add production deployment workflow [#21](https://github.com/vexuas/djs-typescript-template/pull/21) ([@vexuas](https://github.com/vexuas))
+- Create script to get latest version [#20](https://github.com/vexuas/djs-typescript-template/pull/20) ([@vexuas](https://github.com/vexuas))
+- Add mixpanel analytics tracking [#19](https://github.com/vexuas/djs-typescript-template/pull/19) ([@vexuas](https://github.com/vexuas))
+- Add test workflow file [#17](https://github.com/vexuas/djs-typescript-template/pull/17) ([@vexuas](https://github.com/vexuas))
+
+#### 🏠 Internal
+
+- Release/2023 04 09 [#16](https://github.com/vexuas/djs-typescript-template/pull/16) ([@vexuas](https://github.com/vexuas))
+
+#### Authors: 1
+
+- Gabriel R ([@vexuas](https://github.com/vexuas))
+
+---
+
 # v0.1.1 (Sun Apr 09 2023)
 
 #### 🧪 Tests
