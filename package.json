@@ -1,6 +1,6 @@
 {
   "name": "djs-typescript-template",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Opinionated Typescript template for building Discord.js applications",
   "license": "MIT",
   "scripts": {
