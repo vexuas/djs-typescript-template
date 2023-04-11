@@ -4,28 +4,12 @@ import { AppCommand, AppCommandOptions } from '../commands';
 
 export function generateHelloEmbed(): APIEmbed {
   const embed: APIEmbed = {
-    title: 'Hello Command',
+    title: 'Hello',
     color: 55296,
     description: 'Hi there! (◕ᴗ◕✿)',
     thumbnail: {
       url: 'https://cdn.discordapp.com/attachments/1089616880576245853/1094559253395689562/mitsuha.jpg',
     },
-    fields: [
-      {
-        name: 'Field 1',
-        value: 'This is a normal field!',
-      },
-      {
-        name: 'Field 2',
-        value: 'This is an inline field!',
-        inline: true,
-      },
-      {
-        name: 'Field 3',
-        value: 'This is an inline field too!',
-        inline: true,
-      },
-    ],
   };
   return embed;
 }

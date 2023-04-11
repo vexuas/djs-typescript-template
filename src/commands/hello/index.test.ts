@@ -12,6 +12,5 @@ describe('Hello Command', () => {
     expect(embed.description).not.toBeUndefined();
     expect(embed.color).not.toBeUndefined();
     expect(embed.fields).not.toBeUndefined();
-    expect(embed.fields && embed.fields.length).toBe(3);
   });
 });
