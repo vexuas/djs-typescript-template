@@ -11,7 +11,6 @@ export const generateInviteEmbed = (): APIEmbed => {
 };
 
 export default {
-  commandType: 'Information',
   data: new SlashCommandBuilder()
     .setName('invite')
     .setDescription('Generates an invite link for My App'),

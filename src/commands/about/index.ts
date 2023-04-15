@@ -50,7 +50,6 @@ export const generateAboutEmbed = (app?: Client): APIEmbed => {
   return embed;
 };
 export default {
-  commandType: 'Information',
   data: new SlashCommandBuilder()
     .setName('about')
     .setDescription('Displays information about My App'),
