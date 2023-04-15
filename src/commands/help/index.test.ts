@@ -1,15 +1,17 @@
-import { generateHelloEmbed } from '.';
+import { generateHelpEmbed } from '.';
 
-describe('Hello Command', () => {
+describe('Help Command', () => {
   it('generates an embed correctly', () => {
-    const embed = generateHelloEmbed();
+    const embed = generateHelpEmbed();
 
     expect(embed).not.toBeUndefined();
   });
   it('displays the correct fields in the embed', () => {
-    const embed = generateHelloEmbed();
+    const embed = generateHelpEmbed();
 
     expect(embed.description).not.toBeUndefined();
     expect(embed.color).not.toBeUndefined();
+    expect(embed.fields).not.toBeUndefined();
+    expect(embed.fields && embed.fields.length).toBe(1);
   });
 });
