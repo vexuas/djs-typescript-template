@@ -5,9 +5,13 @@ import path from 'path';
 
 export type AppCommands = {
   hello?: AppCommand;
+  about?: AppCommand;
+  help?: AppCommand;
+  invite?: AppCommand;
 };
 export type AppCommand = {
   data: SlashCommandBuilder;
+  commandType?: string;
   execute: (data: AppCommandOptions) => Promise<void>;
 };
 export type AppCommandOptions = {

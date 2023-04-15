@@ -17,6 +17,7 @@ export const generateHelpEmbed = (): APIEmbed => {
   return embed;
 };
 export default {
+  commandType: 'Information',
   data: new SlashCommandBuilder().setName('help').setDescription('Directory hub of commands'),
   async execute({ interaction }: AppCommandOptions) {
     try {
