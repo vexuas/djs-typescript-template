@@ -8,7 +8,10 @@ import {
   WebhookClient,
 } from 'discord.js';
 import { capitalize, isEmpty } from 'lodash';
-import { ERROR_NOTIFICATION_WEBHOOK_URL } from '../config/environment';
+import {
+  BOOT_NOTIFICATION_CHANNEL_ID,
+  ERROR_NOTIFICATION_WEBHOOK_URL,
+} from '../config/environment';
 import { v4 as uuid } from 'uuid';
 
 export const serverNotificationEmbed = async ({
@@ -122,4 +125,13 @@ export const sendErrorLog = async ({
       avatarURL: '',
     });
   }
+};
+
+export const sendBootNotification = async (app: Client) => {
+  console.log("I'm booting up! (◕ᴗ◕✿)");
+  const bootNotificationChannel =
+    BOOT_NOTIFICATION_CHANNEL_ID && app.channels.cache.get(BOOT_NOTIFICATION_CHANNEL_ID);
+  bootNotificationChannel &&
+    bootNotificationChannel.isTextBased() &&
+    (await bootNotificationChannel.send("I'm booting up! (◕ᴗ◕✿)"));
 };
