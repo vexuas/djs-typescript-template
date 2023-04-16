@@ -2,7 +2,7 @@ import { Client } from 'discord.js';
 import fs from 'fs';
 import { Mixpanel } from 'mixpanel';
 import path from 'path';
-import { AppCommands, getApplicationCommands } from '../commands/commands';
+import { AppCommand, getApplicationCommands } from '../commands/commands';
 import { sendErrorLog } from '../utils/helpers';
 
 const appCommands = getApplicationCommands();
@@ -16,7 +16,7 @@ type ExportedEventModule = {
 };
 export type EventModule = {
   app: Client;
-  appCommands?: AppCommands;
+  appCommands?: AppCommand[];
   mixpanel?: Mixpanel | null;
 };
 export function registerEventHandlers({ app, mixpanel }: Props): void {
