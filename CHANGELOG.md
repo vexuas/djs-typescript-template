@@ -1,3 +1,21 @@
+# v0.1.3 (Mon Apr 17 2023)
+
+#### 🔧 Tweaks
+
+- Remove non template implementation [#25](https://github.com/vexuas/djs-typescript-template/pull/25) ([@vexuas](https://github.com/vexuas))
+- Refactor command implementation [#24](https://github.com/vexuas/djs-typescript-template/pull/24) ([@vexuas](https://github.com/vexuas))
+- Create default commands [#23](https://github.com/vexuas/djs-typescript-template/pull/23) ([@vexuas](https://github.com/vexuas))
+
+#### 🏠 Internal
+
+- Release/2023 04 11 [#22](https://github.com/vexuas/djs-typescript-template/pull/22) ([@vexuas](https://github.com/vexuas))
+
+#### Authors: 1
+
+- Gabriel R ([@vexuas](https://github.com/vexuas))
+
+---
+
 # v0.1.2 (Tue Apr 11 2023)
 
 #### 🧪 Tests
