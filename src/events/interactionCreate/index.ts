@@ -11,7 +11,7 @@ export default function ({ app, appCommands, mixpanel }: EventModule) {
       if (interaction.isCommand()) {
         const { commandName } = interaction;
         const command = appCommands.find((command) => command.data.name === commandName);
-        command && (await command.execute({ interaction, app }));
+        command && (await command.execute({ interaction, app, appCommands }));
         mixpanel &&
           sendCommandEvent({
             user: interaction.user,

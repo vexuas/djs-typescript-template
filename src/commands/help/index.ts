@@ -1,26 +1,38 @@
 import { APIEmbed, inlineCode, SlashCommandBuilder } from 'discord.js';
+import { isEmpty, reduce, uniq } from 'lodash';
 import { sendErrorLog } from '../../utils/helpers';
 import { AppCommand, AppCommandOptions } from '../commands';
 
-export const generateHelpEmbed = (): APIEmbed => {
+export const generateHelpEmbed = (appCommands?: AppCommand[]): APIEmbed => {
+  const commandTypes = uniq(
+    appCommands?.map((command) => (command.commandType ? command.commandType : 'Others'))
+  );
+  const commandFields = commandTypes.map((type) => {
+    const commandValues = reduce(
+      appCommands,
+      (accumulator, value) => {
+        return `${accumulator}${isEmpty(accumulator) ? '' : ','} ${inlineCode(value.data.name)}`;
+      },
+      ''
+    );
+    return {
+      name: type,
+      value: commandValues,
+      inline: false,
+    };
+  });
   const embed = {
     color: 55296,
     description: 'Below you can see all the commands that I know!',
-    fields: [
-      {
-        name: 'Information',
-        value: `${inlineCode('about')}, ${inlineCode('help')}, ${inlineCode('invite')}`,
-        inline: false,
-      },
-    ],
+    fields: commandFields,
   };
   return embed;
 };
 export default {
   data: new SlashCommandBuilder().setName('help').setDescription('Directory hub of commands'),
-  async execute({ interaction }: AppCommandOptions) {
+  async execute({ interaction, appCommands }: AppCommandOptions) {
     try {
-      const embed = generateHelpEmbed();
+      const embed = generateHelpEmbed(appCommands);
       await interaction.reply({ embeds: [embed] });
     } catch (error) {
       sendErrorLog({ error, interaction });

@@ -11,6 +11,7 @@ export type AppCommand = {
 export type AppCommandOptions = {
   interaction: CommandInteraction;
   app: Client;
+  appCommands?: AppCommand[];
 };
 type ExportedAppCommand = {
   default: AppCommand;
