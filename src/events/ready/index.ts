@@ -1,20 +1,15 @@
 import { REST, Routes } from 'discord.js';
-import { AppCommands } from '../../commands/commands';
+import { AppCommand } from '../../commands/commands';
 import { BOT_TOKEN, ENV, GUILD_IDS, USE_DATABASE } from '../../config/environment';
 import { createGuildTable, populateGuilds } from '../../services/database';
-import { sendErrorLog } from '../../utils/helpers';
+import { sendBootNotification, sendErrorLog } from '../../utils/helpers';
 import { EventModule } from '../events';
 
 const rest = new REST({ version: '9' }).setToken(BOT_TOKEN);
 
-const registerApplicationCommands = async (commands?: AppCommands) => {
+const registerApplicationCommands = async (commands?: AppCommand[]) => {
   if (!commands) return;
-  const commandList = Object.keys(commands)
-    .map((key) => {
-      const commandKey = commands[key as keyof AppCommands];
-      if (commandKey) return commandKey.data;
-    })
-    .map((command) => command && command.toJSON());
+  const commandList = commands.map((command) => command.data.toJSON());
 
   try {
     if (ENV === 'dev') {
@@ -45,7 +40,7 @@ export default function ({ app, appCommands }: EventModule) {
         await createGuildTable();
         await populateGuilds(app.guilds.cache);
       }
-      console.log("I'm booting up! (◕ᴗ◕✿)");
+      await sendBootNotification(app);
     } catch (error) {
       console.log(error);
     }

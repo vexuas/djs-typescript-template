@@ -3,12 +3,6 @@ import { Client, CommandInteraction } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
 
-export type AppCommands = {
-  hello?: AppCommand;
-  about?: AppCommand;
-  help?: AppCommand;
-  invite?: AppCommand;
-};
 export type AppCommand = {
   data: SlashCommandBuilder;
   commandType?: string;
@@ -17,12 +11,14 @@ export type AppCommand = {
 export type AppCommandOptions = {
   interaction: CommandInteraction;
   app: Client;
+  appCommands?: AppCommand[];
 };
 type ExportedAppCommand = {
   default: AppCommand;
 };
-export function getApplicationCommands(): AppCommands {
-  const appCommands: AppCommands = {};
+export function getApplicationCommands(): AppCommand[] {
+  const appCommands: AppCommand[] = [];
+
   const loadModules = (directoryPath: string) => {
     const files = fs.readdirSync(directoryPath, { withFileTypes: true });
     files.forEach((file) => {
@@ -33,8 +29,7 @@ export function getApplicationCommands(): AppCommands {
       if (file.name === 'index.js') {
         const modulePath = `./${filePath.replace('dist/commands/', '')}`;
         const currentModule = require(modulePath) as ExportedAppCommand;
-        appCommands[directoryPath.replace('dist/commands/', '') as keyof AppCommands] =
-          currentModule.default;
+        appCommands.push(currentModule.default);
       }
     });
   };

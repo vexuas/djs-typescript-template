@@ -1,18 +1,19 @@
 import {
   APIEmbed,
+  Channel,
   Client,
   CommandInteraction,
   Guild,
   GuildChannel,
+  inlineCode,
   WebhookClient,
 } from 'discord.js';
 import { capitalize, isEmpty } from 'lodash';
-import { ERROR_NOTIFICATION_WEBHOOK_URL } from '../config/environment';
+import {
+  BOOT_NOTIFICATION_CHANNEL_ID,
+  ERROR_NOTIFICATION_WEBHOOK_URL,
+} from '../config/environment';
 import { v4 as uuid } from 'uuid';
-
-export const codeMark = (text: string) => {
-  return '`' + text + '`';
-};
 
 export const serverNotificationEmbed = async ({
   app,
@@ -71,8 +72,8 @@ export const sendErrorLog = async ({
   if (interaction) {
     const errorEmbed = {
       description: `Oops something went wrong! D:\n\nError: ${
-        error.message ? codeMark(error.message) : codeMark('Unexpected Error')
-      }\nError ID: ${codeMark(errorID)}`,
+        error.message ? inlineCode(error.message) : inlineCode('Unexpected Error')
+      }\nError ID: ${inlineCode(errorID)}`,
       color: 16711680,
     };
     await interaction.editReply({ embeds: [errorEmbed] });
@@ -125,4 +126,15 @@ export const sendErrorLog = async ({
       avatarURL: '',
     });
   }
+};
+
+export const sendBootNotification = async (app: Client) => {
+  console.log("I'm booting up! (◕ᴗ◕✿)");
+  const bootNotificationChannel: Channel | undefined =
+    BOOT_NOTIFICATION_CHANNEL_ID && !isEmpty(BOOT_NOTIFICATION_CHANNEL_ID)
+      ? app.channels.cache.get(BOOT_NOTIFICATION_CHANNEL_ID)
+      : undefined;
+  bootNotificationChannel &&
+    bootNotificationChannel.isTextBased() &&
+    (await bootNotificationChannel.send("I'm booting up! (◕ᴗ◕✿)"));
 };
