@@ -1,5 +1,6 @@
 import {
   APIEmbed,
+  Channel,
   Client,
   CommandInteraction,
   Guild,
@@ -129,8 +130,10 @@ export const sendErrorLog = async ({
 
 export const sendBootNotification = async (app: Client) => {
   console.log("I'm booting up! (◕ᴗ◕✿)");
-  const bootNotificationChannel =
-    BOOT_NOTIFICATION_CHANNEL_ID && app.channels.cache.get(BOOT_NOTIFICATION_CHANNEL_ID);
+  const bootNotificationChannel: Channel | undefined =
+    BOOT_NOTIFICATION_CHANNEL_ID && !isEmpty(BOOT_NOTIFICATION_CHANNEL_ID)
+      ? app.channels.cache.get(BOOT_NOTIFICATION_CHANNEL_ID)
+      : undefined;
   bootNotificationChannel &&
     bootNotificationChannel.isTextBased() &&
     (await bootNotificationChannel.send("I'm booting up! (◕ᴗ◕✿)"));
