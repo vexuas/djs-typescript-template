@@ -11,7 +11,13 @@ export const generateHelpEmbed = (appCommands?: AppCommand[]): APIEmbed => {
     const commandValues = reduce(
       appCommands,
       (accumulator, value) => {
-        return `${accumulator}${isEmpty(accumulator) ? '' : ','} ${inlineCode(value.data.name)}`;
+        return `${accumulator}${isEmpty(accumulator) || value.commandType !== type ? '' : ', '}${
+          value.commandType === type
+            ? inlineCode(value.data.name)
+            : !value.commandType && type === 'Others'
+            ? inlineCode(value.data.name)
+            : ''
+        }`;
       },
       ''
     );
@@ -29,6 +35,7 @@ export const generateHelpEmbed = (appCommands?: AppCommand[]): APIEmbed => {
   return embed;
 };
 export default {
+  commandType: 'Information',
   data: new SlashCommandBuilder().setName('help').setDescription('Directory hub of commands'),
   async execute({ interaction, appCommands }: AppCommandOptions) {
     try {
