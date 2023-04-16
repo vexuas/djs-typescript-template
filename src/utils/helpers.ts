@@ -4,15 +4,12 @@ import {
   CommandInteraction,
   Guild,
   GuildChannel,
+  inlineCode,
   WebhookClient,
 } from 'discord.js';
 import { capitalize, isEmpty } from 'lodash';
 import { ERROR_NOTIFICATION_WEBHOOK_URL } from '../config/environment';
 import { v4 as uuid } from 'uuid';
-
-export const codeMark = (text: string) => {
-  return '`' + text + '`';
-};
 
 export const serverNotificationEmbed = async ({
   app,
@@ -71,8 +68,8 @@ export const sendErrorLog = async ({
   if (interaction) {
     const errorEmbed = {
       description: `Oops something went wrong! D:\n\nError: ${
-        error.message ? codeMark(error.message) : codeMark('Unexpected Error')
-      }\nError ID: ${codeMark(errorID)}`,
+        error.message ? inlineCode(error.message) : inlineCode('Unexpected Error')
+      }\nError ID: ${inlineCode(errorID)}`,
       color: 16711680,
     };
     await interaction.editReply({ embeds: [errorEmbed] });

@@ -1,5 +1,5 @@
-import { APIEmbed, SlashCommandBuilder } from 'discord.js';
-import { codeMark, sendErrorLog } from '../../utils/helpers';
+import { APIEmbed, inlineCode, SlashCommandBuilder } from 'discord.js';
+import { sendErrorLog } from '../../utils/helpers';
 import { AppCommand, AppCommandOptions } from '../commands';
 
 export const generateHelpEmbed = (): APIEmbed => {
@@ -9,7 +9,7 @@ export const generateHelpEmbed = (): APIEmbed => {
     fields: [
       {
         name: 'Information',
-        value: `${codeMark('about')}, ${codeMark('help')}, ${codeMark('invite')}`,
+        value: `${inlineCode('about')}, ${inlineCode('help')}, ${inlineCode('invite')}`,
         inline: false,
       },
     ],
