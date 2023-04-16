@@ -1,6 +1,6 @@
 import { REST, Routes } from 'discord.js';
 import { AppCommand } from '../../commands/commands';
-import { BOT_TOKEN, ENV, GUILD_IDS, USE_DATABASE } from '../../config/environment';
+import { BOT_ID, BOT_TOKEN, ENV, GUILD_IDS, USE_DATABASE } from '../../config/environment';
 import { createGuildTable, populateGuilds } from '../../services/database';
 import { sendBootNotification, sendErrorLog } from '../../utils/helpers';
 import { EventModule } from '../events';
@@ -14,17 +14,15 @@ const registerApplicationCommands = async (commands?: AppCommand[]) => {
   try {
     if (ENV === 'dev') {
       if (GUILD_IDS) {
-        //Registering guild-only commands to the bot; I like to use a different bot for dev purposes
-        //TODO: Change id here to placeholder
-        await rest.put(Routes.applicationGuildCommands('929421200797626388', GUILD_IDS), {
+        //Registering guild-only commands to the bot i.e. only specified servers will see commands; I like to use a different bot when in development
+        await rest.put(Routes.applicationGuildCommands(BOT_ID, GUILD_IDS), {
           body: commandList,
         });
         console.log('Successfully registered guild application commands');
       }
     } else {
-      //Registering global commands for the bot i.e. every guild will see the commands; I mostly just use this in production
-      //TODO: Change id here to placeholder
-      await rest.put(Routes.applicationCommands('518196430104428579'), { body: commandList });
+      //Registering global commands for the bot i.e. every server bot is in will see commands; use this in production
+      await rest.put(Routes.applicationCommands(BOT_ID), { body: commandList });
       console.log('Successfully registered global application commands');
     }
   } catch (error) {
