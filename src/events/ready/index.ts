@@ -1,6 +1,12 @@
 import { REST, Routes } from 'discord.js';
 import { AppCommands } from '../../commands/commands';
-import { BOT_TOKEN, ENV, GUILD_IDS, USE_DATABASE } from '../../config/environment';
+import {
+  BOOT_NOTIFICATION_CHANNEL_ID,
+  BOT_TOKEN,
+  ENV,
+  GUILD_IDS,
+  USE_DATABASE,
+} from '../../config/environment';
 import { createGuildTable, populateGuilds } from '../../services/database';
 import { sendErrorLog } from '../../utils/helpers';
 import { EventModule } from '../events';
@@ -46,6 +52,11 @@ export default function ({ app, appCommands }: EventModule) {
         await populateGuilds(app.guilds.cache);
       }
       console.log("I'm booting up! (◕ᴗ◕✿)");
+      const bootNotificationChannel =
+        BOOT_NOTIFICATION_CHANNEL_ID && app.channels.cache.get(BOOT_NOTIFICATION_CHANNEL_ID);
+      bootNotificationChannel &&
+        bootNotificationChannel.isTextBased() &&
+        (await bootNotificationChannel.send("I'm booting up! (◕ᴗ◕✿)"));
     } catch (error) {
       console.log(error);
     }
