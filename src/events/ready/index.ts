@@ -9,28 +9,22 @@ const rest = new REST({ version: '9' }).setToken(BOT_TOKEN);
 
 const registerApplicationCommands = async (commands?: AppCommand[]) => {
   if (!commands) return;
-  console.log(commands);
-  // const commandList = Object.keys(commands)
-  //   .map((key) => {
-  //     const commandKey = commands[key as keyof AppCommands];
-  //     if (commandKey) return commandKey.data;
-  //   })
-  //   .map((command) => command && command.toJSON());
-  // console.log(commandList);
+  const commandList = commands.map((command) => command.data.toJSON());
+
   try {
     if (ENV === 'dev') {
       if (GUILD_IDS) {
         //Registering guild-only commands to the bot; I like to use a different bot for dev purposes
         //TODO: Change id here to placeholder
         await rest.put(Routes.applicationGuildCommands('929421200797626388', GUILD_IDS), {
-          body: [],
+          body: commandList,
         });
         console.log('Successfully registered guild application commands');
       }
     } else {
       //Registering global commands for the bot i.e. every guild will see the commands; I mostly just use this in production
       //TODO: Change id here to placeholder
-      await rest.put(Routes.applicationCommands('518196430104428579'), { body: [] });
+      await rest.put(Routes.applicationCommands('518196430104428579'), { body: commandList });
       console.log('Successfully registered global application commands');
     }
   } catch (error) {
