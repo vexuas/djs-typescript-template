@@ -1,11 +1,11 @@
 import { AppCommand, AppCommandOptions } from '../commands';
 import { APIEmbed, hyperlink, SlashCommandBuilder } from 'discord.js';
-import { sendErrorLog } from '../../utils/helpers';
+import { getEmbedColor, sendErrorLog } from '../../utils/helpers';
 
 export const generateInviteEmbed = (): APIEmbed => {
   const embed = {
     description: hyperlink('Add me to your servers! (◕ᴗ◕✿)', ''),
-    color: 55296,
+    color: getEmbedColor(),
   };
   return embed;
 };
