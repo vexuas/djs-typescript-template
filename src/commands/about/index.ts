@@ -2,14 +2,14 @@ import { APIEmbed, Client, SlashCommandBuilder } from 'discord.js';
 import { BOT_UPDATED_AT, BOT_VERSION } from '../../version';
 import { AppCommand, AppCommandOptions } from '../commands';
 import { format } from 'date-fns';
-import { sendErrorLog } from '../../utils/helpers';
+import { getEmbedColor, sendErrorLog } from '../../utils/helpers';
 
 export const generateAboutEmbed = (app?: Client): APIEmbed => {
   const embed = {
     title: 'Info',
     description:
       "Hi there! This is where you'd want to explain what your App does and any other cool stuff about it! :D",
-    color: 55296,
+    color: getEmbedColor(),
     thumbnail: {
       url: 'https://cdn.discordapp.com/attachments/1089616880576245853/1094559253395689562/mitsuha.jpg',
     },

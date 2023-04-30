@@ -35,7 +35,7 @@ export const serverNotificationEmbed = async ({
   const embed = {
     title: type === 'join' ? 'Joined a new server' : 'Left a server',
     description: `I'm now in **${app.guilds.cache.size}** servers!`,
-    color: type === 'join' ? 55296 : 16711680,
+    color: getEmbedColor(type === 'join' ? '#33FF33' : '#FF0000'),
     thumbnail: {
       url: guildIcon ? guildIcon.replace(/jpeg|jpg/gi, 'png') : defaultIcon,
     },
@@ -74,7 +74,7 @@ export const sendErrorLog = async ({
       description: `Oops something went wrong! D:\n\nError: ${
         error.message ? inlineCode(error.message) : inlineCode('Unexpected Error')
       }\nError ID: ${inlineCode(errorID)}`,
-      color: 16711680,
+      color: getEmbedColor('#FF0000'),
     };
     await interaction.editReply({ embeds: [errorEmbed] });
   }
@@ -82,7 +82,7 @@ export const sendErrorLog = async ({
     const interactionChannel = interaction?.channel as GuildChannel | undefined;
     const notificationEmbed: APIEmbed = {
       title: interaction ? `Error | ${capitalize(interaction.commandName)} Command` : 'Error',
-      color: 16711680,
+      color: getEmbedColor('#FF0000'),
       description: `uuid: ${errorID}\nError: ${error.message ? error.message : 'Unexpected Error'}`,
       fields: interaction
         ? [
@@ -137,4 +137,10 @@ export const sendBootNotification = async (app: Client) => {
   bootNotificationChannel &&
     bootNotificationChannel.isTextBased() &&
     (await bootNotificationChannel.send("I'm booting up! (◕ᴗ◕✿)"));
+};
+
+//Helper to pass in a hexadecimal string color that converts it to a number code that discord accepts
+//Returns a default color if no argument is passed
+export const getEmbedColor = (color?: string): number => {
+  return parseInt(color ? color.replace('#', '0x') : '#3399FF'.replace('#', '0x'));
 };

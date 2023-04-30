@@ -1,6 +1,6 @@
 import { APIEmbed, inlineCode, SlashCommandBuilder } from 'discord.js';
 import { isEmpty, reduce, uniq } from 'lodash';
-import { sendErrorLog } from '../../utils/helpers';
+import { getEmbedColor, sendErrorLog } from '../../utils/helpers';
 import { AppCommand, AppCommandOptions } from '../commands';
 
 export const generateHelpEmbed = (appCommands?: AppCommand[]): APIEmbed => {
@@ -28,7 +28,7 @@ export const generateHelpEmbed = (appCommands?: AppCommand[]): APIEmbed => {
     };
   });
   const embed = {
-    color: 55296,
+    color: getEmbedColor(),
     description: 'Below you can see all the commands that I know!',
     fields: commandFields,
   };
