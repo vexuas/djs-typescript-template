@@ -1,6 +1,6 @@
 import { REST, Routes } from 'discord.js';
 import { AppCommand } from '../../commands/commands';
-import { BOT_ID, BOT_TOKEN, ENV, GUILD_IDS, USE_DATABASE } from '../../config/environment';
+import { BOT_ID, BOT_TOKEN, DATABASE_CONFIG, ENV, GUILD_ID } from '../../config/environment';
 import { createGuildTable, populateGuilds } from '../../services/database';
 import { sendBootNotification, sendErrorLog } from '../../utils/helpers';
 import { EventModule } from '../events';
@@ -13,9 +13,9 @@ const registerApplicationCommands = async (commands?: AppCommand[]) => {
 
   try {
     if (ENV === 'dev') {
-      if (GUILD_IDS) {
+      if (GUILD_ID) {
         //Registering guild-only commands to the bot i.e. only specified servers will see commands; I like to use a different bot when in development
-        await rest.put(Routes.applicationGuildCommands(BOT_ID, GUILD_IDS), {
+        await rest.put(Routes.applicationGuildCommands(BOT_ID, GUILD_ID), {
           body: commandList,
         });
         console.log('Successfully registered guild application commands');
@@ -34,7 +34,7 @@ export default function ({ app, appCommands }: EventModule) {
   app.once('ready', async () => {
     try {
       await registerApplicationCommands(appCommands);
-      if (USE_DATABASE) {
+      if (DATABASE_CONFIG) {
         await createGuildTable();
         await populateGuilds(app.guilds.cache);
       }
