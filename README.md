@@ -4,21 +4,21 @@
 
 # djs-typescript-template
 
-A complete and opinionated template to create full Discord apps using discordjs and typescript
+A complete and opinionated template to create full Discord bots using discordjs and typescript
 
-This project came about from me realising I take a ridiculous amount of time trying to set up a new Discord app from scratch. Not only from initialising the project but also adding the relevant foundations and features that I primarily use. Since most of my coding projects revolve around Discord and me being a sucker for productivity, I decided to create a boilerplate modelled after how I normally develop them.
+This project came about from me realising I take a ridiculous amount of time trying to set up a new Discord bot from scratch. Not only from initialising the project but also adding the relevant foundations and features that I primarily use. Since most of my coding projects revolve around Discord and me being a sucker for productivity, I decided to create a boilerplate modelled after how I normally develop them.
 
-I'm not sure exactly how much time would be saved but it did feel pretty significant when I used this on [Nino, a random anime image app](https://github.com/vexuas/nino), which took roughly just under a week from initialising the project to having a running production instance. Pretty good numbers if you ask me 🤷‍♂️
+I'm not sure exactly how much time would be saved but it did feel pretty significant when I used this on [Nino, a random anime image bot](https://github.com/vexuas/nino), which took roughly just under a week from initialising the project to having a running production instance. Pretty good numbers if you ask me 🤷‍♂️
 
 
 ## Prerequisites
-I wasn't really tailoring this template to be accessible to everyone (since I was creating it more for myself) but I would think overall it's not too complicated. That being said, this does assume you have a good grasp of Typescript or just Javascript in general. Having some experience with creating Discord apps previously does help but not really required.
+I wasn't really tailoring this template to be accessible to everyone (since I was creating it more for myself) but I would think overall it's not too complicated. That being said, this does assume you have a good grasp of Typescript or just Javascript in general. Having some experience with creating Discord bots previously does help but not really required.
 
 You would also need the following before getting started:
 - Have a Discord Application created from the [Discord Dev Portal](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)
 - Have the Discord Application [invited to a Discord Server](https://discordjs.guide/preparations/adding-your-bot-to-servers.html#bot-invite-links)
-- Node with a version of at least v16.13.0
-- Yarn
+- [Node](https://heynode.com/tutorial/install-nodejs-locally-nvm/) with a version of at least v16.13.0
+- [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable)
 
 ## Quick Installation
 1. Use this template to create a new repository
@@ -26,9 +26,9 @@ You would also need the following before getting started:
     - `git clone [your new repo]`
     - `cd [your new repo file]`
 3. Install dependencies
-    - `yarn intall`
+    - `yarn install`
 4. Add required environment variables
-    - To start your Discord app, you would need the following core environment variables:
+    - To start your Discord bot, you would need the following core environment variables:
         - `BOT_TOKEN`
         - `BOT_ID`
         - `GUILD_ID`
