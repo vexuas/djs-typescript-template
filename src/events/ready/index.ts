@@ -1,6 +1,6 @@
 import { REST, Routes } from 'discord.js';
 import { AppCommand } from '../../commands/commands';
-import { BOT_ID, BOT_TOKEN, ENV, GUILD_IDS, USE_DATABASE } from '../../config/environment';
+import { BOT_ID, BOT_TOKEN, DATABASE_CONFIG, ENV, GUILD_IDS } from '../../config/environment';
 import { createGuildTable, populateGuilds } from '../../services/database';
 import { sendBootNotification, sendErrorLog } from '../../utils/helpers';
 import { EventModule } from '../events';
@@ -34,7 +34,7 @@ export default function ({ app, appCommands }: EventModule) {
   app.once('ready', async () => {
     try {
       await registerApplicationCommands(appCommands);
-      if (USE_DATABASE) {
+      if (DATABASE_CONFIG) {
         await createGuildTable();
         await populateGuilds(app.guilds.cache);
       }
