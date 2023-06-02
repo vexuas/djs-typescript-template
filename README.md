@@ -16,6 +16,7 @@ I wasn't really tailoring this template to be accessible to everyone (since I wa
 
 You would also need the following before getting started:
 - Have a Discord Application created from the [Discord Dev Portal](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)
+- Have the Discord Application [invited to a Discord Server](https://discordjs.guide/preparations/adding-your-bot-to-servers.html#bot-invite-links)
 - Node with a version of at least v16.13.0
 - Yarn
 
@@ -28,18 +29,16 @@ You would also need the following before getting started:
     - `yarn intall`
 4. Add required environment variables
     - To start your Discord app, you would need the following core environment variables:
-        - `ENV`
         - `BOT_TOKEN`
         - `BOT_ID`
-        - `GUILD_IDS`
-    - Create a `environment.ts` file under `src/config`
+        - `GUILD_ID`
+    - These can be defined by creating a `environment.ts` file under `src/config`
         - `mkdir src/config && touch src/config/environment.ts`
-    - Export the relevant variables above
+    - Finally, export the variables above with your data
     ```
-    export const ENV = 'dev';
     export const BOT_TOKEN = 'Your Discord Bot Token';
     export const BOT_ID = 'Your Discord Bot ID';
-    export const GUILD_IDS = 'The Discord Server ID you want the bot to register Slash Commands in'
+    export const GUILD_ID = 'The Discord Server ID you want the bot to register Slash Commands in'
     ```
  5. Start your App
      - `yarn start`
