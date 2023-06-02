@@ -1,8 +1,8 @@
 import { Collection, Guild } from 'discord.js';
 import { Pool, PoolClient } from 'pg';
-import { databaseConfig } from '../config/database';
+import { DATABASE_CONFIG } from '../config/environment';
 import { sendErrorLog } from '../utils/helpers';
-const pool: Pool = new Pool(databaseConfig);
+const pool = DATABASE_CONFIG ? new Pool(DATABASE_CONFIG) : null;
 
 type GuildRecord = {
   uuid: string;
@@ -12,6 +12,7 @@ type GuildRecord = {
 };
 
 export async function createGuildTable() {
+  if (!pool) return;
   const client: PoolClient = await pool.connect();
   if (client) {
     try {
@@ -29,6 +30,7 @@ export async function createGuildTable() {
   }
 }
 export async function getGuilds() {
+  if (!pool) return;
   const client: PoolClient = await pool.connect();
   if (client) {
     try {
@@ -60,6 +62,7 @@ export async function populateGuilds(existingGuilds: Collection<string, Guild>) 
   }
 }
 export async function insertNewGuild(newGuild: Guild) {
+  if (!pool) return;
   const client: PoolClient = await pool.connect();
   if (client) {
     try {
@@ -82,6 +85,7 @@ export async function insertNewGuild(newGuild: Guild) {
   }
 }
 export async function deleteGuild(existingGuild: Guild) {
+  if (!pool) return;
   const client: PoolClient = await pool.connect();
   if (client) {
     try {
