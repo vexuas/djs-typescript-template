@@ -44,12 +44,9 @@ jobs:
       - name: Load environment config
         run: >
           echo "export const ENV = 'dev'; export const BOT_TOKEN = ''; export const MIXPANEL_ID = ''; export const TOP_GG_TOKEN = '';
-          export const GUILD_IDS = ''; export const GUILD_NOTIFICATION_WEBHOOK_URL = ''; export const USE_DATABASE = false; 
+          export const GUILD_IDS = ''; export const GUILD_NOTIFICATION_WEBHOOK_URL = ''; export const DATABASE_CONFIG = null; 
           export const ERROR_NOTIFICATION_WEBHOOK_URL = ''; export const BOOT_NOTIFICATION_CHANNEL_ID = ''; export const BOT_ID = '';" 
           > src/config/environment.ts
-
-      - name: Load database config
-        run: echo "export const databaseConfig = {};" > src/config/database.ts
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -74,12 +71,9 @@ jobs:
       - name: Load environment config
         run: >
           echo "export const ENV = 'dev'; export const BOT_TOKEN = ''; export const MIXPANEL_ID = ''; export const TOP_GG_TOKEN = '';
-          export const GUILD_IDS = ''; export const GUILD_NOTIFICATION_WEBHOOK_URL = ''; export const USE_DATABASE = false; 
+          export const GUILD_IDS = ''; export const GUILD_NOTIFICATION_WEBHOOK_URL = ''; export const DATABASE_CONFIG = null;
           export const ERROR_NOTIFICATION_WEBHOOK_URL = ''; export const BOOT_NOTIFICATION_CHANNEL_ID = ''; export const BOT_ID = '';"  
           > src/config/environment.ts
-
-      - name: Load database config
-        run: echo "export const databaseConfig = {};" > src/config/database.ts
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
