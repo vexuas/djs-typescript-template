@@ -52,3 +52,26 @@ This template uses Discord's Slash Commands `/`:
 ## Usage
 By default, this template is set up so that it can be immediately used without any of the fancy features below. However if you want to use or follow any of the paradigms, it's as easy as just defining the relevant environment variables attached to its corresponding feature
 
+### Creating Commands
+### Attaching Event Listeners
+### Database
+### Product Usage Tracking
+### TopGG Server No. Tracking
+### Server Notifications
+### Error Notifications
+### Booting Up Notifications
+### Full Usage Environment File
+
+
+## Contributing
+Any contributions are greatly appreciated! If you have any suggestions that would make this better, you can either create a pull request or simply open an issue!
+1. Create a new branch
+    - `git checkout -b your-new-branch`
+2. Commit your changes
+    - `git commit -a -m 'Description of the changes'`
+3. Push your branch
+    - `git push origin your-new-branch`
+4. Open a pull request
+
+## License
+Distributed under the [MIT License](https://github.com/vexuas/djs-typescript-template/blob/feature/add-detailed-readme/LICENSE)
