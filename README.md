@@ -20,7 +20,7 @@ You would also need the following before getting started:
 - [Node](https://heynode.com/tutorial/install-nodejs-locally-nvm/) with a version of at least v16.13.0
 - [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable)
 
-## Quick Installation
+## Installation
 1. Use this template to create a new repository
 2. Clone the new repository and then change directly into it
     - `git clone [your new repo]`
@@ -42,3 +42,13 @@ You would also need the following before getting started:
     ```
  5. Start your App
      - `yarn start`
+
+## Command List
+This template uses Discord's Slash Commands `/`:
+- `about` - information hub of Your App
+- `help` - list of commands
+- `invite` - generates Your App's invite link
+
+## Usage
+By default, this template is set up so that it can be immediately used without any of the fancy features below. However if you want to use or follow any of the paradigms, it's as easy as just defining the relevant environment variables attached to its corresponding feature
+
