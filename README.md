@@ -52,8 +52,14 @@ This template uses Discord's Slash Commands `/`:
 ## Usage
 By default, this template is set up so that it can be immediately used without any of the fancy features below. However if you want to use or follow any of the paradigms, it's as easy as just defining the relevant environment variables attached to its corresponding feature
 
+### Starting the App
 ### Creating Commands
 ### Attaching Event Listeners
+### Tests
+### Workflows
+### Releasing
+
+## Advanced Features
 ### Database
 ### Product Usage Tracking
 ### TopGG Server No. Tracking
@@ -64,7 +70,7 @@ By default, this template is set up so that it can be immediately used without a
 
 
 ## Contributing
-Any contributions are greatly appreciated! If you have any suggestions that would make this better, you can either create a pull request or simply open an issue!
+This might be an opionated template but any contributions are greatly appreciated! If you have any suggestions that would make this better, you can either create a pull request or simply open an issue!
 1. Create a new branch
     - `git checkout -b your-new-branch`
 2. Commit your changes
