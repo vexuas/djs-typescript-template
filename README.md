@@ -50,23 +50,51 @@ This template uses Discord's Slash Commands `/`:
 - `invite` - generates Your App's invite link
 
 ## Usage
-By default, this template is set up so that it can be immediately used without any of the fancy features below. However if you want to use or follow any of the paradigms, it's as easy as just defining the relevant environment variables attached to its corresponding feature
-
 ### Starting the App
+This uses [tsc-watch](https://github.com/gilamran/tsc-watch) to start and automatically restart the app whenever a file is changed. Basically it's nodemon for Typescript but instead of directly listening to file changes, it listens to the compilation status. I find this quite useful since I don't have to remember to always compile my latest changes and then restart my app.
+
+More information of the scripts used in `package.json` but you can just use `yarn start` and pretty much forget about it
 ### Creating Commands
+Commands can be easily created in the format of `src/commands/your_command_name/index.ts`. This is important so that it can be automatically registered to Discord through the handler in `src/commands/commands.ts`.
+
+A typical command is structured and can be set up as
+```
+src/commands/hello/index.ts
+import { SlashCommandBuilder } from 'discord.js';
+import { AppCommand, AppCommandOptions } from '../commands';
+
+export default {
+  commandType: 'Fun', 
+  data: new SlashCommandBuilder().setName('hello').setDescription('Says hello!'),
+  async execute({ interaction }: AppCommandOptions){
+    await interaction.reply('hello'); 
+  }
+} as AppCommand;
+```
+where 
+- `commandType` - Optional but used for categorisation in the /help command
+- `data` - For registering to Discord purposes. Uses a Discord.js helper to quickly build a Slash command; this is what you'll see in the chat menu
+- `execute()` - Handler when the /hello command is triggered; this is where you'd put whatever the command does
+
+![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/cb83042f-b109-404f-aa80-e6ba6912f477)
+![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/2f649324-8807-4338-b03d-9bfaac599b50)
+![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/e7bc1543-23e7-465c-a8f6-3596467115d5)
+
+
 ### Attaching Event Listeners
 ### Tests
-### Workflows
 ### Releasing
+### Deployment
 
 ## Advanced Features
+By default, this template can be immediately used without any of the fancy features below. However if you want to use a specific feature or even all of them, it's pretty straightforward by defining the relevant environment variables attached to its corresponding feature
 ### Database
 ### Product Usage Tracking
 ### TopGG Server No. Tracking
 ### Server Notifications
 ### Error Notifications
 ### Booting Up Notifications
-### Full Usage Environment File
+### Full Environment File
 
 
 ## Contributing
