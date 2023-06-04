@@ -91,6 +91,34 @@ export const ENV = 'prod';
 ```
 
 ### Attaching Event Listeners
+Similar to creating commands, creating an event listener is also straightforward and will be automatically exported using the format `src/events/event_name/index.ts`. You can see more in detail how they are exported inside `src/events/events.ts`.
+
+For example, if you want to listen to the `guildCreate` event whenever your bot joins a new Discord server, this will be structured as:
+```ts
+src/events/guildCreate/index.ts
+import { Guild } from 'discord.js';
+import { EventModule } from '../events';
+
+export default function({ app }: EventModule){
+  app.on('guildCreate', async (guild: Guild) => {
+    console.log(`my bot just joined a new server, ${guild.name}! :D`)
+  })
+};
+```
+
+Unlike from commands where just creating the file is enough, you would also need to enable [Gateway Intents](https://discord.com/developers/docs/topics/gateway#list-of-intents) for your bot. Discord introduced Gateway Intents so developers can choose which events their bot receives based on which data it needs to function. This means that if you do not specify intents, you won't receive the data from that particular event even if the event file is created.
+
+Using the example above, the Gateway Intent for the `guildCreate` event is `Guilds`. We can then define this intent for our bot during initialisation:
+```ts
+App.ts
+import { Client, GatewayIntentBits } from 'discord.js';
+
+const app: Client = new Client({
+  intents: [GatewayIntentBits.Guilds],
+});
+```
+
+More reading here: https://discordjs.guide/popular-topics/intents.html
 
 ### Tests
 ### Releasing
