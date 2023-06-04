@@ -4,12 +4,13 @@
 
 # djs-typescript-template
 
-A complete and opinionated template to create full Discord bots using discordjs and typescript
+A complete and opinionated template to create full Discord bots using [discordjs](https://discord.js.org/#/) and typescript
 
 This project came about from me realising I take a ridiculous amount of time trying to set up a new Discord bot from scratch. Not only from initialising the project but also adding the relevant foundations and features that I primarily use. Since most of my coding projects revolve around Discord and me being a sucker for productivity, I decided to create a boilerplate modelled after how I normally develop them.
 
 I'm not sure exactly how much time would be saved but it did feel pretty significant when I used this on [Nino, a random anime image bot](https://github.com/vexuas/nino), which took roughly just under a week from initialising the project to having a running production instance. Pretty good numbers if you ask me 🤷‍♂️
 
+Discord.js version used: **v14.8.0**
 
 ## Prerequisites
 I wasn't really tailoring this template to be accessible to everyone (since I was creating it more for myself) but I would think overall it's not too complicated. That being said, this does assume you have a good grasp of Typescript or just Javascript in general. Having some experience with creating Discord bots previously does help but not really required.
@@ -51,14 +52,14 @@ This template uses Discord's Slash Commands `/`:
 
 ## Usage
 ### Starting the App
-This uses [tsc-watch](https://github.com/gilamran/tsc-watch) to start and automatically restart the app whenever a file is changed. Basically it's nodemon for Typescript but instead of directly listening to file changes, it listens to the compilation status. I find this quite useful since I don't have to remember to always compile my latest changes and then restart my app.
+The template uses [tsc-watch](https://github.com/gilamran/tsc-watch) to start and automatically restart the app whenever a file is changed. Basically it's nodemon for Typescript but instead of directly listening to file changes, it listens to the compilation status. I find this quite useful since I don't have to remember to always compile my latest changes and then restart my app.
 
 More information of the scripts used in `package.json` but you can just use `yarn start` and pretty much forget about it
 ### Creating Commands
-Commands can be easily created in the format of `src/commands/your_command_name/index.ts`. This is important so that it can be automatically registered to Discord through the handler in `src/commands/commands.ts`.
+Commands can be easily created in the format of `src/commands/your_command_name/index.ts`
 
-A typical command is structured and can be set up as
-```
+A typical command follows the structure:
+```ts
 src/commands/hello/index.ts
 import { SlashCommandBuilder } from 'discord.js';
 import { AppCommand, AppCommandOptions } from '../commands';
@@ -74,14 +75,23 @@ export default {
 where 
 - `commandType` - Optional but used for categorisation in the /help command
 - `data` - For registering to Discord purposes. Uses a Discord.js helper to quickly build a Slash command; this is what you'll see in the chat menu
-- `execute()` - Handler when the /hello command is triggered; this is where you'd put whatever the command does
+- `execute` - Function to handle when the /hello command is triggered; this is where you'd put whatever the command does
 
 ![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/cb83042f-b109-404f-aa80-e6ba6912f477)
 ![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/2f649324-8807-4338-b03d-9bfaac599b50)
 ![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/e7bc1543-23e7-465c-a8f6-3596467115d5)
 
+### Registering Commands
+Registering commands to Discord is automatic as long as a command is created using the format mentioned above. You can see more in detail how they are exported inside `src/commands/commands.ts` and how they're registered in `src/events/ready/index.ts`.
+
+The template registers the commands in **one server** by default. If you want to register the commands globally i.e. in every server the bot is in, you can create a `ENV` environment variable with a value of `prod`
+```ts
+src/config/environment.ts
+export const ENV = 'prod';
+```
 
 ### Attaching Event Listeners
+
 ### Tests
 ### Releasing
 ### Deployment
