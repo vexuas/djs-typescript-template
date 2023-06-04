@@ -127,6 +127,7 @@ There is talk that discordjs would eventually support e2e testing natively but i
 
 For example, a `hello` command can be created as:
 ```ts
+src/commands/hello/index.ts
 import { APIEmbed, SlashCommandBuilder } from 'discord.js';
 import { sendErrorLog } from '../../utils/helpers';
 import { AppCommand, AppCommandOptions } from '../commands';
@@ -174,6 +175,7 @@ export default {
 ```
 and this can be tested as
 ```ts
+src/commands/hello/index.test.ts
 import { generateHelloEmbed } from '.';
 
 describe('Hello Command', () => {
@@ -194,7 +196,24 @@ describe('Hello Command', () => {
 ```
 
 ### Releasing
+This template uses [Auto](https://intuit.github.io/auto/index) to automate its release process. It's not necessary to follow it since any process suitable for you can work but if you decide to use auto, you would need to first create a [github token that has repo access](https://intuit.github.io/auto/docs/welcome/getting-started#2-configure-environment-variables). Then create a `.env` file with a `GH_TOKEN` variable that stores your token
+```
+.env
+GH_TOKEN='Your Token Here'
+```
+You would then need to create your project's labels. These labels are necessary in your pull requests as they keep track of your project's version.
+```
+yarn auto create-labels //Creates the labels defined in .autorc
+```
+Note that this script might throw an error if there are duplicate labels in your project already; this is fine to ignore.
+
+Finally during release, you can just do `yarn release` which will generate changelogs and bump up the version number based on previous pull requests
+
+![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/51889a7a-99ba-43e7-bed9-fceb01e04424)
+
 ### Deployment
+
+
 
 ## Advanced Features
 By default, this template can be immediately used without any of the fancy features below. However if you want to use a specific feature or even all of them, it's pretty straightforward by defining the relevant environment variables attached to its corresponding feature
