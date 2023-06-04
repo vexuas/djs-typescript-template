@@ -106,7 +106,7 @@ export default function({ app }: EventModule){
 };
 ```
 
-Unlike from commands where just creating the file is enough, you would also need to enable [Gateway Intents](https://discord.com/developers/docs/topics/gateway#list-of-intents) for your bot. Discord introduced Gateway Intents so developers can choose which events their bot receives based on which data it needs to function. This means that if you do not specify intents, you won't receive the data from that particular event even if the event file is created.
+Unlike commands where just creating the file is enough, you would also need to enable [Gateway Intents](https://discord.com/developers/docs/topics/gateway#list-of-intents) for your bot. Discord introduced Gateway Intents so developers can choose which events their bot receives based on which data it needs to function. This means that if you do not specify intents, you won't receive the data from that particular event even if the event file is created.
 
 Using the example above, the Gateway Intent for the `guildCreate` event is `Guilds`. We can then define this intent for our bot during initialisation:
 ```ts
@@ -120,7 +120,79 @@ const app: Client = new Client({
 
 More reading here: https://discordjs.guide/popular-topics/intents.html
 
-### Tests
+### Testing
+Testing discord applications end-to-end is frustratingly complicated especially with Slash commands and Typescript. [Cordejs](https://github.com/cordejs/corde) used to somewhat get this done with prefix commands but sadly it doesn't really support Slash commands. An alternative is to mock the whole discordjs client and each of its classes but this is an insane amount of work just so we can test discord itself. 
+
+There is talk that discordjs would eventually support e2e testing natively but in the meantime, this template takes advantage of using [jest](https://jestjs.io/) unit tests. Instead of testing the interaction of discord with the bot, we would test the content that we send to Discord.
+
+For example, a `hello` command can be created as:
+```ts
+import { APIEmbed, SlashCommandBuilder } from 'discord.js';
+import { sendErrorLog } from '../../utils/helpers';
+import { AppCommand, AppCommandOptions } from '../commands';
+
+export function generateHelloEmbed(): APIEmbed {
+  const embed: APIEmbed = {
+    title: 'Hello Command',
+    color: 55296,
+    description: 'Hi there! (◕ᴗ◕✿)',
+    thumbnail: {
+      url: 'https://cdn.discordapp.com/attachments/1089616880576245853/1094559253395689562/mitsuha.jpg',
+    },
+    fields: [
+      {
+        name: 'Field 1',
+        value: 'This is a normal field!',
+      },
+      {
+        name: 'Field 2',
+        value: 'This is an inline field!',
+        inline: true,
+      },
+      {
+        name: 'Field 3',
+        value: 'This is an inline field too!',
+        inline: true,
+      },
+    ],
+  };
+  return embed;
+}
+
+export default {
+  data: new SlashCommandBuilder().setName('hello').setDescription('Greets the user!'),
+  async execute({ interaction }: AppCommandOptions) {
+    try {
+      await interaction.deferReply();
+      const embed = generateHelloEmbed();
+      await interaction.editReply({ embeds: [embed] });
+    } catch (error) {
+      sendErrorLog({ error, interaction });
+    }
+  },
+} as AppCommand;
+```
+and this can be tested as
+```ts
+import { generateHelloEmbed } from '.';
+
+describe('Hello Command', () => {
+  it('generates an embed correctly', () => {
+    const embed = generateHelloEmbed();
+
+    expect(embed).not.toBeUndefined();
+  });
+  it('displays the correct fields in the embed', () => {
+    const embed = generateHelloEmbed();
+
+    expect(embed.description).not.toBeUndefined();
+    expect(embed.color).not.toBeUndefined();
+    expect(embed.fields).not.toBeUndefined();
+    expect(embed.fields && embed.fields.length).toBe(3);
+  });
+});
+```
+
 ### Releasing
 ### Deployment
 
