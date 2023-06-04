@@ -12,7 +12,11 @@ const registerApplicationCommands = async (commands?: AppCommand[]) => {
   const commandList = commands.map((command) => command.data.toJSON());
 
   try {
-    if (ENV === 'dev') {
+    if (ENV === 'prod') {
+      //Registering global commands for the bot i.e. every server bot is in will see commands; use this in production
+      await rest.put(Routes.applicationCommands(BOT_ID), { body: commandList });
+      console.log('Successfully registered global application commands');
+    } else {
       if (GUILD_ID) {
         //Registering guild-only commands to the bot i.e. only specified servers will see commands; I like to use a different bot when in development
         await rest.put(Routes.applicationGuildCommands(BOT_ID, GUILD_ID), {
@@ -20,10 +24,6 @@ const registerApplicationCommands = async (commands?: AppCommand[]) => {
         });
         console.log('Successfully registered guild application commands');
       }
-    } else {
-      //Registering global commands for the bot i.e. every server bot is in will see commands; use this in production
-      await rest.put(Routes.applicationCommands(BOT_ID), { body: commandList });
-      console.log('Successfully registered global application commands');
     }
   } catch (error) {
     sendErrorLog({ error });
