@@ -222,7 +222,7 @@ I personally deploy to [DigitalOcean droplets](https://www.digitalocean.com/prod
 By default, this template can be immediately used and expanded upon without any of the fancy features below. However if you want to use a specific feature or even all of them, it's pretty straightforward by defining the relevant environment variables attached to its corresponding feature
 
 ### Booting Up Notifications
-Sends a message to a discord channel when the bot successfully boots up. Simple but I find it useful so I know the bot is ready to be used.
+Sends a message to a discord channel when the bot successfully boots up. Requires a Discord Channel ID.
 ```ts
 src/config/environment.ts
 export const BOOT_NOTIFICATION_CHANNEL_ID = 'A Discord Channel ID';
@@ -230,6 +230,13 @@ export const BOOT_NOTIFICATION_CHANNEL_ID = 'A Discord Channel ID';
 ![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/a95f9039-1442-4656-b282-fdeae1746387)
 
 ### Server Notifications
+Sends a message embed with relevant server data whenever the bot gets invited or kicked from a server. Requires a Discord Channel Webhook ID.
+```ts
+src/config/environment.ts
+export const GUILD_NOTIFICATION_WEBHOOK_URL = 'A Discord Channel Webhook URL'
+```
+![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/a1afeb67-8c4e-42d9-b5e3-96edcbe6f570)
+
 ### Error Notifications
 ### Database
 ### Product Usage Tracking
