@@ -212,8 +212,11 @@ Finally during release, you can just do `yarn release` which will generate chang
 ![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/51889a7a-99ba-43e7-bed9-fceb01e04424)
 
 ### Deployment
+There's no deployment process to follow for this template as frankly that should be up to you where you want to host your production instance. There is however a workflow setup that runs whenever a release gets published. It only really sends a success notification to a discord channel through a webhook currently but it's expected to have your deployment process before it.
 
+If you do want to follow this workflow, this is the only time you're required to add a [Github Secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) called `DISCORD_NOTIFICATION_WEBHOOK` to your repo with a value of a [Discord webhook url](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks)
 
+I personally deploy to [DigitalOcean droplets](https://www.digitalocean.com/products/droplets) and use pm2 to start the bot (hence the `deploy.config.js`). 
 
 ## Advanced Features
 By default, this template can be immediately used without any of the fancy features below. However if you want to use a specific feature or even all of them, it's pretty straightforward by defining the relevant environment variables attached to its corresponding feature
