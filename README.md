@@ -246,6 +246,22 @@ export const ERROR_NOTIFICATION_WEBHOOK_URL = 'A Discord Channel Webhook URL';
 ![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/a98f0f1d-7e02-469b-82b1-e447ef682e5a)
 
 ### Database
+Use a [PostgreSQL](https://www.postgresql.org/) database to store relevant server data using [node-postgres](https://node-postgres.com/). By default this only handles server data but it can be expanded to store any kind. Requires a PostgreSQL database config.
+```ts
+export const DATABASE_CONFIG = {
+  database: '',
+  host: '',
+  user: '',
+  port: 1234,
+  password: '',
+  ssl: {
+    rejectUnauthorized: false
+  }
+}
+```
+
+I personally use [DigitalOcean databases](https://www.digitalocean.com/products/managed-databases) for the ease-of-use and also since a requirement for a Discord bot to get verified is to have stored data to be encrypted which DigitalOcean does. A bit unrelated but I also like [Trevor](https://trevor.io/) for data visualisation.
+
 ### Product Usage Tracking
 ### TopGG Server No. Tracking
 ### Full Environment File
