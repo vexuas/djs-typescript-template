@@ -277,7 +277,83 @@ export const TOP_GG_TOKEN = 'Topgg bot token';
 ![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/8c9431ac-f2ed-41ce-8d24-846e65a7bb49)
 
 ### Full Environment File
+If you decide to use all the features above or just want to follow how I structure my environment file, this is how it'll look like:
+```ts
+const env = process.env.BOT_ENV || 'dev';
 
+type EnvironmentVariables = {
+  ENV: 'prod' | 'dev';
+  BOT_TOKEN: string;
+  BOT_ID: string;
+  GUILD_ID: string;
+  MIXPANEL_ID?: string;
+  TOP_GG_TOKEN?: string;
+  GUILD_NOTIFICATION_WEBHOOK_URL?: string;
+  ERROR_NOTIFICATION_WEBHOOK_URL?: string;
+  BOOT_NOTIFICATION_CHANNEL_ID?: string;
+  DATABASE_CONFIG?: DatabaseConfig | null;
+};
+type DatabaseConfig = {
+  database: string;
+  host: string;
+  user: string;
+  port: number;
+  password: string;
+  ssl: {
+    rejectUnauthorized: boolean;
+  };
+};
+const initialiseEnvironment = (): EnvironmentVariables => {
+  if (env === 'prod') {
+    return {
+      ENV: 'prod',
+      BOT_TOKEN: '',
+      BOT_ID: '',
+      MIXPANEL_ID: '',
+      TOP_GG_TOKEN: '',
+      GUILD_ID: '',
+      GUILD_NOTIFICATION_WEBHOOK_URL: '',
+      ERROR_NOTIFICATION_WEBHOOK_URL: '',
+      BOOT_NOTIFICATION_CHANNEL_ID: '',
+      DATABASE_CONFIG: null,
+    };
+  }
+  return {
+    ENV: 'dev',
+    BOT_TOKEN: '',
+    BOT_ID: '',
+    GUILD_ID: '',
+    MIXPANEL_ID: '',
+    TOP_GG_TOKEN: '',
+    GUILD_NOTIFICATION_WEBHOOK_URL: '',
+    ERROR_NOTIFICATION_WEBHOOK_URL: '',
+    BOOT_NOTIFICATION_CHANNEL_ID: '',
+    DATABASE_CONFIG: {
+      database: '',
+      host: '',
+      user: '',
+      port: 1234,
+      password: '',
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    },
+  };
+};
+
+export const {
+  ENV,
+  BOT_TOKEN,
+  MIXPANEL_ID,
+  TOP_GG_TOKEN,
+  GUILD_ID,
+  GUILD_NOTIFICATION_WEBHOOK_URL,
+  ERROR_NOTIFICATION_WEBHOOK_URL,
+  BOOT_NOTIFICATION_CHANNEL_ID,
+  BOT_ID,
+  DATABASE_CONFIG,
+}: EnvironmentVariables = initialiseEnvironment();
+```
 
 ## Contributing
 This might be an opionated template but any contributions are greatly appreciated! If you have any suggestions that would make this better, you can either create a pull request or simply open an issue!
