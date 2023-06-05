@@ -230,14 +230,21 @@ export const BOOT_NOTIFICATION_CHANNEL_ID = 'A Discord Channel ID';
 ![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/a95f9039-1442-4656-b282-fdeae1746387)
 
 ### Server Notifications
-Sends a message embed with relevant server data whenever the bot gets invited or kicked from a server. Requires a Discord Channel Webhook ID.
+Sends a message embed with relevant server data whenever the bot gets invited or kicked from a server. Requires a Discord Channel Webhook URL.
 ```ts
 src/config/environment.ts
-export const GUILD_NOTIFICATION_WEBHOOK_URL = 'A Discord Channel Webhook URL'
+export const GUILD_NOTIFICATION_WEBHOOK_URL = 'A Discord Channel Webhook URL';
 ```
 ![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/a1afeb67-8c4e-42d9-b5e3-96edcbe6f570)
 
 ### Error Notifications
+Sends a message embed with relevant error data whenever an error occurs in the bot. Requires a Discord Channel Webhook URL.
+```ts
+src/config/environment.ts
+export const ERROR_NOTIFICATION_WEBHOOK_URL = 'A Discord Channel Webhook URL';
+```
+![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/a98f0f1d-7e02-469b-82b1-e447ef682e5a)
+
 ### Database
 ### Product Usage Tracking
 ### TopGG Server No. Tracking
