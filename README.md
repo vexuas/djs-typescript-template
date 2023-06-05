@@ -263,6 +263,12 @@ export const DATABASE_CONFIG = {
 I personally use [DigitalOcean databases](https://www.digitalocean.com/products/managed-databases) for the ease-of-use and also since a requirement for a Discord bot to get verified is to have stored data to be encrypted which DigitalOcean does. A bit unrelated but I also like [Trevor](https://trevor.io/) for data visualisation.
 
 ### Product Usage Tracking
+Uses [Mixpanel](https://mixpanel.com/) to track product usage and user analytics. Requires a Mixpanel Project Token.
+```ts
+export const MIXPANEL_ID = 'Mixpanel Project Token'
+```
+![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/f8b25e13-591e-403f-8a2c-72f20c1eebe8)
+
 ### TopGG Server No. Tracking
 ### Full Environment File
 
