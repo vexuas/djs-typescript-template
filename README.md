@@ -219,13 +219,21 @@ If you do want to follow this workflow, this is the only time you're required to
 I personally deploy to [DigitalOcean droplets](https://www.digitalocean.com/products/droplets) and use pm2 to start the bot (hence the `deploy.config.js`). 
 
 ## Advanced Features
-By default, this template can be immediately used without any of the fancy features below. However if you want to use a specific feature or even all of them, it's pretty straightforward by defining the relevant environment variables attached to its corresponding feature
+By default, this template can be immediately used and expanded upon without any of the fancy features below. However if you want to use a specific feature or even all of them, it's pretty straightforward by defining the relevant environment variables attached to its corresponding feature
+
+### Booting Up Notifications
+Sends a message to a discord channel when the bot successfully boots up. Simple but I find it useful so I know the bot is ready to be used.
+```ts
+src/config/environment.ts
+export const BOOT_NOTIFICATION_CHANNEL_ID = 'A Discord Channel ID';
+```
+![image](https://github.com/vexuas/djs-typescript-template/assets/42207245/a95f9039-1442-4656-b282-fdeae1746387)
+
+### Server Notifications
+### Error Notifications
 ### Database
 ### Product Usage Tracking
 ### TopGG Server No. Tracking
-### Server Notifications
-### Error Notifications
-### Booting Up Notifications
 ### Full Environment File
 
 
