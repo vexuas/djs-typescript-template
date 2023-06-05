@@ -4,7 +4,7 @@
   "description": "Opinionated Typescript template for building Discord.js applications",
   "license": "MIT",
   "scripts": {
-    "config:init": "mv src/config/environment.template.ts src/config/environment.ts",
+    "config:init": "mkdir src/config && touch src/config/environment.ts && echo \"//Bot Configuration; Required\nexport const BOT_TOKEN = '';\" > src/config/environment.ts",
     "start": "yarn build && yarn build:watch",
     "build": "tsc",
     "build:watch": "yarn tsc-watch --onSuccess 'node dist/App.js'",
