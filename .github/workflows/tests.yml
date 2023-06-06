@@ -39,14 +39,8 @@ jobs:
         with:
           node-version: 16
 
-      - name: Create config folder
-        run: mkdir src/config
       - name: Load environment config
-        run: >
-          echo "export const ENV:string = 'dev'; export const BOT_TOKEN = ''; export const MIXPANEL_ID = ''; export const TOP_GG_TOKEN = '';
-          export const GUILD_ID = ''; export const GUILD_NOTIFICATION_WEBHOOK_URL = ''; export const DATABASE_CONFIG = null; 
-          export const ERROR_NOTIFICATION_WEBHOOK_URL = ''; export const BOOT_NOTIFICATION_CHANNEL_ID = ''; export const BOT_ID = '';" 
-          > src/config/environment.ts
+        run: yarn config:init
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -65,15 +59,8 @@ jobs:
         with:
           node-version: 16
 
-      - name: Create config folder
-        run: mkdir src/config
-
       - name: Load environment config
-        run: >
-          echo "export const ENV = 'dev'; export const BOT_TOKEN = ''; export const MIXPANEL_ID = ''; export const TOP_GG_TOKEN = '';
-          export const GUILD_ID = ''; export const GUILD_NOTIFICATION_WEBHOOK_URL = ''; export const DATABASE_CONFIG = null;
-          export const ERROR_NOTIFICATION_WEBHOOK_URL = ''; export const BOOT_NOTIFICATION_CHANNEL_ID = ''; export const BOT_ID = '';"  
-          > src/config/environment.ts
+        run: yarn config:init
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile

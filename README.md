@@ -29,18 +29,23 @@ You would also need the following before getting started:
 3. Install dependencies
     - `yarn install`
 4. Add required environment variables
-    - To start your Discord bot, you would need the following core environment variables:
+    - You would need the following core environment variables in order to start your Discord bot:
         - `BOT_TOKEN`
         - `BOT_ID`
         - `GUILD_ID`
-    - These can be defined by creating a `environment.ts` file under `src/config`
-        - `mkdir src/config && touch src/config/environment.ts`
-    - Finally, export the variables above with your data
-    ```
-    export const BOT_TOKEN = 'Your Discord Bot Token';
-    export const BOT_ID = 'Your Discord Bot ID';
-    export const GUILD_ID = 'The Discord Server ID you want the bot to register Slash Commands in'
-    ```
+    - Generate these configurations using:
+        ```
+        yarn config:init
+        ```
+    - Finally, fill in the required variables above with your data
+        ```ts
+        src/config/environment.ts
+        //Bot Configuration; Required
+        export const BOT_TOKEN = 'Your Discord Bot Token';
+        export const BOT_ID = 'Your Discord Bot ID';
+        export const GUILD_ID = 'The Discord Server ID you want the bot to register Slash Commands in'
+        ```
+    - Note: You may have noticed at this point there are other environment variables generated as well. These are optional to use and is not necessary for the bot to run but they are defined to avoid typescript errors. More information on these [variables here](https://github.com/vexuas/djs-typescript-template#advanced-features)
  5. Start your App
      - `yarn start`
 
@@ -84,7 +89,7 @@ where
 ### Registering Commands
 Registering commands to Discord is automatic as long as a command is created using the format mentioned above. You can see more in detail how they are exported inside `src/commands/commands.ts` and how they're registered in `src/events/ready/index.ts`.
 
-The template registers the commands in **one server** by default. If you want to register the commands globally i.e. in every server the bot is in, you can create a `ENV` environment variable with a value of `prod`
+The template registers the commands in **one server** by default. If you want to register the commands globally i.e. in every server the bot is in, you can change the `ENV` environment variable with a value of `prod`
 ```ts
 src/config/environment.ts
 export const ENV = 'prod';
