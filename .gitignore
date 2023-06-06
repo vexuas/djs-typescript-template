@@ -6,4 +6,4 @@ dist
 
 # config
 .env
-/src/config/environment.ts
+/src/config
