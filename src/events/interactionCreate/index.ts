@@ -33,7 +33,18 @@ export default function ({ app, appCommands, mixpanel }: EventModule) {
           });
         }
       }
-      //Maybe add buttons, selections and modal handlers here eventually
+      if (interaction.isButton()) {
+        switch (interaction.customId) {
+          default:
+            return;
+        }
+      }
+      if (interaction.isAnySelectMenu()) {
+        switch (interaction.customId) {
+          default:
+            return;
+        }
+      }
     } catch (error) {
       sendErrorLog({ error });
     }
