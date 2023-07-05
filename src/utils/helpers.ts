@@ -1,5 +1,7 @@
 import {
+  AnySelectMenuInteraction,
   APIEmbed,
+  ButtonInteraction,
   Channel,
   Client,
   CommandInteraction,
@@ -143,4 +145,19 @@ export const sendBootNotification = async (app: Client) => {
 //Returns a default color if no argument is passed
 export const getEmbedColor = (color?: string): number => {
   return parseInt(color ? color.replace('#', '0x') : '#3399FF'.replace('#', '0x'));
+};
+
+export const sendWrongUserWarning = async ({
+  interaction,
+}: {
+  interaction: ButtonInteraction | AnySelectMenuInteraction;
+}) => {
+  const wrongUserEmbed = {
+    description: `Oops looks like that interaction wasn't meant for you! I can only properly interact with your own commands.\n\nTo check what I can do, type ${inlineCode(
+      '/help'
+    )}!`,
+    color: getEmbedColor('#FF0000'),
+  };
+  await interaction.deferReply({ ephemeral: true });
+  interaction.editReply({ embeds: [wrongUserEmbed] });
 };
