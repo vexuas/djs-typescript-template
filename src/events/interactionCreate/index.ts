@@ -20,7 +20,7 @@ export default function ({ app, appCommands, mixpanel }: EventModule) {
         if (mixpanel) {
           const eventName = `Use ${capitalize(commandName)}${
             subCommand ? ` ${capitalize(subCommand)}` : ''
-          } command`;
+          } Command`;
           sendAnalyticsEvent({
             user: interaction.user,
             channel: interaction.channel,

@@ -1,6 +1,7 @@
 import { Guild, GuildTextBasedChannel, User } from 'discord.js';
 import { Mixpanel } from 'mixpanel';
 
+//TODO: Refactor this to be a class instead
 type AnalyticsEvent = {
   client: Mixpanel;
   user: User;
