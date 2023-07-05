@@ -23,6 +23,8 @@ export function getApplicationCommands(): AppCommand[] {
     const files = fs.readdirSync(directoryPath, { withFileTypes: true });
     files.forEach((file) => {
       const filePath = path.join(directoryPath, file.name);
+      const nestingOccurence = filePath.match(new RegExp(/\//g) || [])?.length;
+      if (nestingOccurence && nestingOccurence >= 4) return; //We don't want to include any files/folders nested under the base command folder
       if (file.isDirectory()) {
         return loadModules(filePath);
       }
