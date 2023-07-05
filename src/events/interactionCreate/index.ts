@@ -33,6 +33,7 @@ export default function ({ app, appCommands, mixpanel }: EventModule) {
           });
         }
       }
+      //Handle case where someone else tries to use an interaction not triggered by them
       if (interaction.isButton() || interaction.isAnySelectMenu()) {
         if (
           interaction.message.interaction &&
