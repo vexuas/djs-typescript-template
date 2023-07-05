@@ -1,7 +1,7 @@
 import { ApplicationCommandOptionType, CacheType, Interaction } from 'discord.js';
 import { capitalize } from 'lodash';
 import { sendAnalyticsEvent } from '../../services/analytics';
-import { sendErrorLog } from '../../utils/helpers';
+import { sendErrorLog, sendWrongUserWarning } from '../../utils/helpers';
 import { EventModule } from '../events';
 
 export default function ({ app, appCommands, mixpanel }: EventModule) {
@@ -31,6 +31,15 @@ export default function ({ app, appCommands, mixpanel }: EventModule) {
             eventName,
             subCommand,
           });
+        }
+      }
+      if (interaction.isButton() || interaction.isAnySelectMenu()) {
+        if (
+          interaction.message.interaction &&
+          interaction.user.id !== interaction.message.interaction.user.id
+        ) {
+          sendWrongUserWarning({ interaction });
+          return;
         }
       }
       if (interaction.isButton()) {
