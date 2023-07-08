@@ -56,6 +56,7 @@ export default {
     .setDescription('Displays information about My App'),
   async execute({ interaction, app }: AppCommandOptions) {
     try {
+      await interaction.deferReply();
       const embed = generateAboutEmbed(app);
       await interaction.reply({ embeds: [embed] });
     } catch (error) {

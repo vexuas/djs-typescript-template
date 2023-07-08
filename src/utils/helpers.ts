@@ -3,8 +3,8 @@ import {
   APIEmbed,
   ButtonInteraction,
   Channel,
+  ChatInputCommandInteraction,
   Client,
-  CommandInteraction,
   Guild,
   GuildChannel,
   inlineCode,
@@ -65,9 +65,15 @@ export const serverNotificationEmbed = async ({
 export const sendErrorLog = async ({
   error,
   interaction,
+  option,
+  subCommand,
+  customTitle,
 }: {
   error: any;
-  interaction?: CommandInteraction;
+  interaction?: ChatInputCommandInteraction | AnySelectMenuInteraction | ButtonInteraction;
+  option?: string | null;
+  subCommand?: string;
+  customTitle?: string;
 }) => {
   console.error(error);
   const errorID = uuid();
@@ -78,14 +84,22 @@ export const sendErrorLog = async ({
       }\nError ID: ${inlineCode(errorID)}`,
       color: getEmbedColor('#FF0000'),
     };
-    await interaction.editReply({ embeds: [errorEmbed] });
+    await interaction.editReply({ embeds: [errorEmbed], components: [] });
   }
   if (ERROR_NOTIFICATION_WEBHOOK_URL && !isEmpty(ERROR_NOTIFICATION_WEBHOOK_URL)) {
     const interactionChannel = interaction?.channel as GuildChannel | undefined;
     const notificationEmbed: APIEmbed = {
-      title: interaction ? `Error | ${capitalize(interaction.commandName)} Command` : 'Error',
+      title: customTitle
+        ? `Error | ${customTitle}`
+        : interaction
+        ? `Error | ${interaction.isCommand() ? capitalize(interaction.commandName) : ''}${
+            subCommand ? ` ${capitalize(subCommand)}` : ''
+          } Command`
+        : 'Error',
       color: getEmbedColor('#FF0000'),
-      description: `uuid: ${errorID}\nError: ${error.message ? error.message : 'Unexpected Error'}`,
+      description: `uuid: ${errorID}\nError: ${
+        error.message ? error.message : 'Unexpected Error'
+      }\n${option ? `Option: ${option}` : ''}`,
       fields: interaction
         ? [
             {
