@@ -1,3 +1,25 @@
+# v0.1.5 (Sat Jul 08 2023)
+
+#### 🔧 Tweaks
+
+- Update error helper [#39](https://github.com/vexuas/djs-typescript-template/pull/39) ([@vexuas](https://github.com/vexuas))
+- Add deployment workflow example [#38](https://github.com/vexuas/djs-typescript-template/pull/38) ([@vexuas](https://github.com/vexuas))
+- Add wrong user interaction helper [#37](https://github.com/vexuas/djs-typescript-template/pull/37) ([@vexuas](https://github.com/vexuas))
+- Add condition in interaction listeners for button and select menus [#36](https://github.com/vexuas/djs-typescript-template/pull/36) ([@vexuas](https://github.com/vexuas))
+- Update analytics file [#35](https://github.com/vexuas/djs-typescript-template/pull/35) ([@vexuas](https://github.com/vexuas))
+- Support nested command folders [#34](https://github.com/vexuas/djs-typescript-template/pull/34) ([@vexuas](https://github.com/vexuas))
+- Add topgg autoposter on initialise [#33](https://github.com/vexuas/djs-typescript-template/pull/33) ([@vexuas](https://github.com/vexuas))
+
+#### 🏠 Internal
+
+- Release/2023 06 07 [#32](https://github.com/vexuas/djs-typescript-template/pull/32) ([@vexuas](https://github.com/vexuas))
+
+#### Authors: 1
+
+- Gabriel R ([@vexuas](https://github.com/vexuas))
+
+---
+
 # v0.1.4 (Wed Jun 07 2023)
 
 #### 🔧 Tweaks
