@@ -39,6 +39,7 @@ export default {
   data: new SlashCommandBuilder().setName('help').setDescription('Directory hub of commands'),
   async execute({ interaction, appCommands }: AppCommandOptions) {
     try {
+      await interaction.deferReply();
       const embed = generateHelpEmbed(appCommands);
       await interaction.reply({ embeds: [embed] });
     } catch (error) {

@@ -17,6 +17,7 @@ export default {
     .setDescription('Generates an invite link for My App'),
   async execute({ interaction }: AppCommandOptions) {
     try {
+      await interaction.deferReply();
       const embed = generateInviteEmbed();
       await interaction.reply({ embeds: [embed] });
     } catch (error) {
