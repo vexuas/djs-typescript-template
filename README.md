@@ -221,7 +221,35 @@ There's no deployment process to follow for this template as frankly that should
 
 If you do want to follow this workflow, this is the only time you're required to add a [Github Secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) called `DISCORD_NOTIFICATION_WEBHOOK` to your repo with a value of a [Discord webhook url](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks)
 
-I personally deploy to [DigitalOcean droplets](https://www.digitalocean.com/products/droplets) and use pm2 to start the bot (hence the `deploy.config.js`). 
+I personally deploy to [DigitalOcean droplets](https://www.digitalocean.com/products/droplets) and use pm2 to start the bot (hence the `deploy.config.js`). Example workflow:
+```yml
+- name: Logs in to DigitalOcean droplet and deploy changes
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USERNAME }}
+          password: ${{ secrets.DO_PASSWORD }}
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            nvm install 16.13.0
+            pm2 stop MyApp
+            pm2 delete MyApp
+            cd MyApp
+            git restore .
+            git clean -f
+            git checkout develop
+            git pull
+            git fetch --tags
+            git branch | grep -v "develop" | xargs git branch -D            
+            git checkout tags/${{ github.ref_name }} -b prod/${{ github.ref_name }}
+            echo "${{ secrets.ENVIRONMENT_PROD }}" > src/config/environment.ts
+            yarn update:version
+            yarn install
+            rm -R dist
+            yarn build
+            pm2 start deploy.config.js --env prod
+``` 
 
 ## Advanced Features
 By default, this template can be immediately used and expanded upon without any of the fancy features below. However if you want to use a specific feature or even all of them, it's pretty straightforward by defining the relevant environment variables attached to its corresponding feature
