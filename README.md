@@ -233,9 +233,9 @@ I personally deploy to [DigitalOcean droplets](https://www.digitalocean.com/prod
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             nvm install 16.13.0
-            pm2 stop nessie
-            pm2 delete nessie
-            cd nessie
+            pm2 stop MyApp
+            pm2 delete MyApp
+            cd MyApp
             git restore .
             git clean -f
             git checkout develop
