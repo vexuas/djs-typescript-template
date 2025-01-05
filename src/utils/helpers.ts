@@ -26,8 +26,7 @@ export const serverNotificationEmbed = async ({
   guild: Guild;
   type: 'join' | 'leave';
 }): Promise<APIEmbed> => {
-  const defaultIcon =
-    'https://cdn.discordapp.com/attachments/248430185463021569/614789995596742656/Wallpaper2.png';
+  const defaultIcon = 'https://vexuas.b-cdn.net/you_got_that.png';
   const guildIcon = guild.icon && guild.iconURL();
   const guildOwner =
     type === 'join'

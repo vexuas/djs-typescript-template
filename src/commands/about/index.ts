@@ -11,7 +11,7 @@ export const generateAboutEmbed = (app?: Client): APIEmbed => {
       "Hi there! This is where you'd want to explain what your App does and any other cool stuff about it! :D",
     color: getEmbedColor(),
     thumbnail: {
-      url: 'https://cdn.discordapp.com/attachments/1089616880576245853/1094559253395689562/mitsuha.jpg',
+      url: 'https://vexuas.b-cdn.net/mitsuha.jpg',
     },
     fields: [
       {
