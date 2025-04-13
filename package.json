@@ -29,7 +29,7 @@
     "lodash": "^4.17.21",
     "mixpanel": "^0.18.1",
     "pg": "^8.14.1",
-    "topgg-autoposter": "^2.0.1",
+    "topgg-autoposter": "^2.0.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
