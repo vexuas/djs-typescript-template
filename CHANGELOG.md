@@ -1,3 +1,47 @@
+# v0.1.6 (Sun Apr 13 2025)
+
+#### 🐛 Fixes
+
+- Use edit reply instead of reply after defer [#61](https://github.com/vexuas/djs-typescript-template/pull/61) ([@vexuas](https://github.com/vexuas))
+
+#### 🔧 Tweaks
+
+- Update to use node 18 [#59](https://github.com/vexuas/djs-typescript-template/pull/59) ([@vexuas](https://github.com/vexuas))
+- Update cdn to personal [#51](https://github.com/vexuas/djs-typescript-template/pull/51) ([@vexuas](https://github.com/vexuas))
+
+#### 🐛 Bug Fix
+
+- Add dependabot yml [#53](https://github.com/vexuas/djs-typescript-template/pull/53) ([@vexuas](https://github.com/vexuas))
+
+#### 🏠 Internal
+
+- Release/2023 07 08 [#40](https://github.com/vexuas/djs-typescript-template/pull/40) ([@vexuas](https://github.com/vexuas))
+
+#### 🔩 Dependency Updates
+
+- Bump topgg-autoposter from 2.0.1 to 2.0.2 [#57](https://github.com/vexuas/djs-typescript-template/pull/57) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @babel/runtime from 7.21.5 to 7.27.0 [#60](https://github.com/vexuas/djs-typescript-template/pull/60) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump pg and @types/pg [#58](https://github.com/vexuas/djs-typescript-template/pull/58) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump typescript from 5.0.4 to 5.8.3 [#56](https://github.com/vexuas/djs-typescript-template/pull/56) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump mixpanel from 0.17.0 to 0.18.1 [#55](https://github.com/vexuas/djs-typescript-template/pull/55) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump ts-jest from 29.1.0 to 29.3.1 [#54](https://github.com/vexuas/djs-typescript-template/pull/54) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump undici from 5.28.4 to 5.28.5 [#52](https://github.com/vexuas/djs-typescript-template/pull/52) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump cross-spawn from 7.0.3 to 7.0.6 [#49](https://github.com/vexuas/djs-typescript-template/pull/49) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump ws from 8.13.0 to 8.18.0 [#48](https://github.com/vexuas/djs-typescript-template/pull/48) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump micromatch from 4.0.5 to 4.0.8 [#47](https://github.com/vexuas/djs-typescript-template/pull/47) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump undici from 5.26.3 to 5.28.4 [#46](https://github.com/vexuas/djs-typescript-template/pull/46) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @babel/traverse from 7.21.5 to 7.23.2 [#44](https://github.com/vexuas/djs-typescript-template/pull/44) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump undici from 5.22.0 to 5.26.3 [#43](https://github.com/vexuas/djs-typescript-template/pull/43) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump word-wrap from 1.2.3 to 1.2.4 [#42](https://github.com/vexuas/djs-typescript-template/pull/42) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump semver from 6.3.0 to 6.3.1 [#41](https://github.com/vexuas/djs-typescript-template/pull/41) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Gabriel R ([@vexuas](https://github.com/vexuas))
+
+---
+
 # v0.1.5 (Sat Jul 08 2023)
 
 #### 🔧 Tweaks
