@@ -20,7 +20,7 @@ You would also need the following before getting started:
 
 - Have a Discord Application created from the [Discord Dev Portal](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)
 - Have the Discord Application [invited to a Discord Server](https://discordjs.guide/preparations/adding-your-bot-to-servers.html#bot-invite-links)
-- [Node](https://heynode.com/tutorial/install-nodejs-locally-nvm/) with a version of at least v16.13.0
+- [Node](https://heynode.com/tutorial/install-nodejs-locally-nvm/) with a version of at least v18.0.0
 - [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable)
 
 ## Installation
@@ -260,7 +260,7 @@ I personally deploy to [DigitalOcean droplets](https://www.digitalocean.com/prod
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            nvm install 16.13.0
+            nvm install 18.0.0
             pm2 stop MyApp
             pm2 delete MyApp
             cd MyApp
