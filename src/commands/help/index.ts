@@ -41,7 +41,7 @@ export default {
     try {
       await interaction.deferReply();
       const embed = generateHelpEmbed(appCommands);
-      await interaction.reply({ embeds: [embed] });
+      await interaction.editReply({ embeds: [embed] });
     } catch (error) {
       sendErrorLog({ error, interaction });
     }
