@@ -1,3 +1,31 @@
+# v0.1.7 (Tue Jun 24 2025)
+
+#### 🔧 Tweaks
+
+- Update to use digital ocean cdn [#73](https://github.com/vexuas/djs-typescript-template/pull/73) ([@vexuas](https://github.com/vexuas))
+
+#### 🏠 Internal
+
+- Release/2025 04 13 [#62](https://github.com/vexuas/djs-typescript-template/pull/62) ([@vexuas](https://github.com/vexuas))
+
+#### 🔩 Dependency Updates
+
+- Bump @typescript-eslint/eslint-plugin from 5.59.1 to 5.62.0 [#70](https://github.com/vexuas/djs-typescript-template/pull/70) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/lodash from 4.17.16 to 4.17.17 [#71](https://github.com/vexuas/djs-typescript-template/pull/71) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @typescript-eslint/parser from 5.59.1 to 5.62.0 [#69](https://github.com/vexuas/djs-typescript-template/pull/69) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump undici from 5.28.5 to 5.29.0 [#68](https://github.com/vexuas/djs-typescript-template/pull/68) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump eslint-plugin-unused-imports from 2.0.0 to 4.1.4 [#67](https://github.com/vexuas/djs-typescript-template/pull/67) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/lodash from 4.14.194 to 4.17.16 [#66](https://github.com/vexuas/djs-typescript-template/pull/66) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump tsc-watch from 6.0.4 to 6.2.1 [#65](https://github.com/vexuas/djs-typescript-template/pull/65) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump date-fns from 2.30.0 to 4.1.0 [#64](https://github.com/vexuas/djs-typescript-template/pull/64) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Gabriel R ([@vexuas](https://github.com/vexuas))
+
+---
+
 # v0.1.6 (Sun Apr 13 2025)
 
 #### 🐛 Fixes
