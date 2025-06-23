@@ -26,7 +26,7 @@ export const serverNotificationEmbed = async ({
   guild: Guild;
   type: 'join' | 'leave';
 }): Promise<APIEmbed> => {
-  const defaultIcon = 'https://vexuas.b-cdn.net/you_got_that.png';
+  const defaultIcon = 'https://cdn.vexuas.com/Avatars/you_got_that.png';
   const guildIcon = guild.icon && guild.iconURL();
   const guildOwner =
     type === 'join'

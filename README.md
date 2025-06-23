@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://vexuas.b-cdn.net/mitsuha.jpg" style="width: 180px" />
+  <img src="https://cdn.vexuas.com/Avatars/mitsuha.jpg" style="width: 180px" />
 </div>
 
 # djs-typescript-template
@@ -162,7 +162,7 @@ export function generateHelloEmbed(): APIEmbed {
     color: 55296,
     description: 'Hi there! (◕ᴗ◕✿)',
     thumbnail: {
-      url: 'https://vexuas.b-cdn.net/mitsuha.jpg',
+      url: 'https://cdn.vexuas.com/Avatars/mitsuha.jpg',
     },
     fields: [
       {
